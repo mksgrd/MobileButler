@@ -4,12 +4,13 @@ import android.content.Context;
 import android.media.AudioManager;
 
 public class SoundSwitcher {
-    private AudioManager audioManager = null;
-    private boolean notificationMuteState = true;
-    private boolean alarmMuteState = true;
-    private boolean musicMuteState = true;
-    private boolean ringMuteState = true;
-    private boolean systemMuteState = true;
+    private AudioManager audioManager;
+
+    private int notificationVolume;
+    private int alarmVolume;
+    private int musicVolume;
+    private int ringVolume;
+    private int systemVolume;
 
     public SoundSwitcher() {
     }
@@ -20,62 +21,63 @@ public class SoundSwitcher {
 
     public void setContext(Context context) {
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+
+        notificationVolume = audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
+        alarmVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+        musicVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        ringVolume = audioManager.getStreamVolume(AudioManager.STREAM_RING);
+        systemVolume = audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
     }
 
-    public boolean isNotificationMute() {
-        return notificationMuteState;
+    private void setStreamVolume(int streamType, int volume) {
+        if (volume >= 0 && volume <= audioManager.getStreamMaxVolume(streamType))
+            audioManager.setStreamVolume(streamType, volume, AudioManager.FLAG_SHOW_UI);
+        else
+            throw new IllegalArgumentException("Volume value is incorrect");
     }
 
-    public void setNotificationMuteState(boolean notificationMuteState) {
-        this.notificationMuteState = notificationMuteState;
-        audioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, notificationMuteState);
+    public int getNotificationVolume() {
+        return notificationVolume;
     }
 
-    public boolean isAlarmMute() {
-        return alarmMuteState;
+    public void setNotificationVolume(int notificationVolume) {
+        setStreamVolume(AudioManager.STREAM_NOTIFICATION, notificationVolume);
+        this.notificationVolume = notificationVolume;
     }
 
-    public void setAlarmMuteState(boolean alarmMuteState) {
-        this.alarmMuteState = alarmMuteState;
-        audioManager.setStreamMute(AudioManager.STREAM_ALARM, alarmMuteState);
+    public int getAlarmVolume() {
+        return alarmVolume;
     }
 
-    public boolean isMusicMute() {
-        return musicMuteState;
+    public void setAlarmVolume(int alarmVolume) {
+        setStreamVolume(AudioManager.STREAM_ALARM, alarmVolume);
+        this.alarmVolume = alarmVolume;
     }
 
-    public void setMusicMuteState(boolean musicMuteState) {
-        this.musicMuteState = musicMuteState;
-        audioManager.setStreamMute(AudioManager.STREAM_MUSIC, musicMuteState);
+    public int getMusicVolume() {
+        return musicVolume;
     }
 
-    public boolean isRingMute() {
-        return ringMuteState;
+    public void setMusicVolume(int musicVolume) {
+        setStreamVolume(AudioManager.STREAM_MUSIC, musicVolume);
+        this.musicVolume = musicVolume;
     }
 
-    public void setRingMuteState(boolean ringMuteState) {
-        this.ringMuteState = ringMuteState;
-        audioManager.setStreamMute(AudioManager.STREAM_RING, ringMuteState);
+    public int getRingVolume() {
+        return ringVolume;
     }
 
-    public boolean isSystemMute() {
-        return systemMuteState;
+    public void setRingVolume(int ringVolume) {
+        setStreamVolume(AudioManager.STREAM_RING, ringVolume);
+        this.ringVolume = ringVolume;
     }
 
-    public void setSystemMuteState(boolean systemMuteState) {
-        this.systemMuteState = systemMuteState;
-        audioManager.setStreamMute(AudioManager.STREAM_SYSTEM, systemMuteState);
+    public int getSystemVolume() {
+        return systemVolume;
     }
 
-    public void setMuteAllState(boolean muteAllState) {
-        setNotificationMuteState(muteAllState);
-        setAlarmMuteState(muteAllState);
-        setMusicMuteState(muteAllState);
-        setRingMuteState(muteAllState);
-        setSystemMuteState(muteAllState);
-    }
-
-    public boolean isMuteAll() {
-        return notificationMuteState && alarmMuteState && musicMuteState && ringMuteState && systemMuteState;
+    public void setSystemVolume(int systemVolume) {
+        setStreamVolume(AudioManager.STREAM_SYSTEM, systemVolume);
+        this.systemVolume = systemVolume;
     }
 }
