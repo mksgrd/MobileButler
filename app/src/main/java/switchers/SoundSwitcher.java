@@ -29,9 +29,9 @@ public class SoundSwitcher {
         systemVolume = audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
     }
 
-    private void setStreamVolume(int streamType, int volume) {
-        if (volume >= 0 && volume <= audioManager.getStreamMaxVolume(streamType))
-            audioManager.setStreamVolume(streamType, volume, AudioManager.FLAG_SHOW_UI);
+    private void setVolume(int stream, int volume) {
+        if (volume >= 0 && volume <= audioManager.getStreamMaxVolume(stream))
+            audioManager.setStreamVolume(stream, volume, AudioManager.FLAG_SHOW_UI);
         else
             throw new IllegalArgumentException("Volume value is incorrect");
     }
@@ -41,7 +41,7 @@ public class SoundSwitcher {
     }
 
     public void setNotificationVolume(int notificationVolume) {
-        setStreamVolume(AudioManager.STREAM_NOTIFICATION, notificationVolume);
+        setVolume(AudioManager.STREAM_NOTIFICATION, notificationVolume);
         this.notificationVolume = notificationVolume;
     }
 
@@ -50,7 +50,7 @@ public class SoundSwitcher {
     }
 
     public void setAlarmVolume(int alarmVolume) {
-        setStreamVolume(AudioManager.STREAM_ALARM, alarmVolume);
+        setVolume(AudioManager.STREAM_ALARM, alarmVolume);
         this.alarmVolume = alarmVolume;
     }
 
@@ -59,7 +59,7 @@ public class SoundSwitcher {
     }
 
     public void setMusicVolume(int musicVolume) {
-        setStreamVolume(AudioManager.STREAM_MUSIC, musicVolume);
+        setVolume(AudioManager.STREAM_MUSIC, musicVolume);
         this.musicVolume = musicVolume;
     }
 
@@ -68,7 +68,7 @@ public class SoundSwitcher {
     }
 
     public void setRingVolume(int ringVolume) {
-        setStreamVolume(AudioManager.STREAM_RING, ringVolume);
+        setVolume(AudioManager.STREAM_RING, ringVolume);
         this.ringVolume = ringVolume;
     }
 
@@ -77,7 +77,15 @@ public class SoundSwitcher {
     }
 
     public void setSystemVolume(int systemVolume) {
-        setStreamVolume(AudioManager.STREAM_SYSTEM, systemVolume);
+        setVolume(AudioManager.STREAM_SYSTEM, systemVolume);
         this.systemVolume = systemVolume;
+    }
+
+    public void setAllVolume(int allVolume) {
+        setNotificationVolume(allVolume);
+        setAlarmVolume(allVolume);
+        setMusicVolume(allVolume);
+        setRingVolume(allVolume);
+        setSystemVolume(allVolume);
     }
 }
