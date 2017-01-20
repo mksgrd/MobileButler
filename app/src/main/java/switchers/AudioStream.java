@@ -1,4 +1,4 @@
-package audioStreamHandlers;
+package switchers;
 
 import android.media.AudioManager;
 
@@ -18,7 +18,7 @@ public class AudioStream {
 
     public AudioStream(int streamType, AudioManager audioManager) {
         this(streamType);
-        initStream(audioManager);
+        initAudioManager(audioManager);
     }
 
     public int getStreamType() {
@@ -35,7 +35,7 @@ public class AudioStream {
             throw new IllegalArgumentException("Stream type is incorrect");
     }
 
-    public void initStream(AudioManager audioManager) {
+    public void initAudioManager(AudioManager audioManager) {
         if (streamType == -1)
             throw new RuntimeException("Stream type is not set");
 
