@@ -6,9 +6,9 @@ import eventManager.Task;
 import eventManager.TaskScheduler;
 
 public class ProfileEvent extends Event {
+    private final EventScheduler eventScheduler = new EventScheduler();
+    private final TaskScheduler taskScheduler = new TaskScheduler();
     private Profile profile = null;
-    private EventScheduler eventScheduler = new EventScheduler();
-    private TaskScheduler taskScheduler = new TaskScheduler();
 
     public ProfileEvent(Profile profile) {
         this.profile = profile;

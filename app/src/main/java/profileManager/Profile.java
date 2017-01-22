@@ -6,9 +6,9 @@ import eventManager.Task;
 import java.util.ArrayList;
 
 public class Profile {
+    private final ArrayList<Event> events = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
     private String name = "Profile";
-    private ArrayList<Event> events = new ArrayList<>();
-    private ArrayList<Task> tasks = new ArrayList<>();
 
     public String getName() {
         return name;

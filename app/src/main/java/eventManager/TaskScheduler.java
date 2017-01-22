@@ -1,7 +1,7 @@
 package eventManager;
 
 public class TaskScheduler {
-    private EventScheduler eventScheduler = new EventScheduler();
+    private final EventScheduler eventScheduler = new EventScheduler();
 
     public void scheduleTask(Task task) {
         eventScheduler.scheduleEvent(task.getStartEvent());

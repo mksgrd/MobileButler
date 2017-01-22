@@ -1,13 +1,13 @@
 package eventManager;
 
 public abstract class Task {
-    private Event startEvent = new Event() {
+    private final Event startEvent = new Event() {
         @Override
         public void run() {
             onStartEvent();
         }
     };
-    private Event stopEvent = new Event() {
+    private final Event stopEvent = new Event() {
         @Override
         public void run() {
             onStopEvent();

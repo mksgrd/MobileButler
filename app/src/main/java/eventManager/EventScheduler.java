@@ -5,9 +5,9 @@ import java.util.Calendar;
 import java.util.Timer;
 
 public class EventScheduler {
-    private Timer timer = new Timer();
-    private ArrayList<Event> scheduledEvents = new ArrayList<>();
-    private Calendar currentMoment = Calendar.getInstance();
+    private final Timer timer = new Timer();
+    private final ArrayList<Event> scheduledEvents = new ArrayList<>();
+    private final Calendar currentMoment = Calendar.getInstance();
 
     public void scheduleEvent(Event event) {
         scheduledEvents.add(event);
@@ -15,7 +15,7 @@ public class EventScheduler {
         long waitUntilRun = event.getStartMoment().getTimeInMillis() - currentMoment.getTimeInMillis();
 
         if (waitUntilRun <= 0)
-            waitUntilRun = 1;
+            throw new RuntimeException("Event cannot be scheduled. The start time has already passed.");
 
         if (event.isRepeatable())
             timer.schedule(event, waitUntilRun, event.getRepeatPeriod().getTimeInMillis());
