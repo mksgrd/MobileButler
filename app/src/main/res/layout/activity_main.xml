@@ -21,18 +21,6 @@
         android:inputType="textPersonName"
         android:text="Название сети"/>
 
-    <EditText
-        android:id="@+id/netPassTE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/netNameTE"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/netNameTE"
-        android:layout_marginTop="45dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Пароль"/>
-
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
@@ -46,14 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="WEP"/>
-
-        <RadioButton
-            android:id="@+id/wpaRbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="WPA"/>
+            android:text="WEP/WPA"/>
 
         <RadioButton
             android:id="@+id/openRbutton"
@@ -88,5 +69,16 @@
         android:layout_below="@+id/enableWifiButton"
         android:layout_centerHorizontal="true"
         android:text="Выключить Wi-Fi"/>
+
+    <EditText
+        android:id="@+id/netPassTE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/netNameTE"
+        android:layout_alignStart="@+id/netNameTE"
+        android:layout_below="@+id/netNameTE"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Пароль"/>
 
 </RelativeLayout>

@@ -20,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
         final EditText name = (EditText) findViewById(R.id.netNameTE);
         final EditText pass = (EditText) findViewById(R.id.netPassTE);
 
-        name.setText("Smart_boxGAS");
-        pass.setText("stopandgo1904");
-
         connector.setContext(this);
 
         RadioGroup group = (RadioGroup) findViewById(R.id.radioGroup);
@@ -35,10 +32,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.wepRbutton:
-                        type = WifiConnector.NETWORK_TYPE_WEP;
-                        break;
-                    case R.id.wpaRbutton:
-                        type = WifiConnector.NETWORK_TYPE_WPA;
+                        type = WifiConnector.NETWORK_TYPE_WEP_WPA;
                         break;
                     case R.id.openRbutton:
                         type = WifiConnector.NETWORK_TYPE_OPEN;
