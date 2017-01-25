@@ -37,7 +37,7 @@ public class WifiConnector {
         } else if (networkType == NETWORK_TYPE_OPEN)
             wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
         else
-            throw new IllegalArgumentException("Network type is incorrect");
+            throw new RuntimeException("Network type is incorrect");
 
         wifiManager.addNetwork(wifiConfiguration);
 
