@@ -32,7 +32,7 @@ public class AudioStream {
                 streamType == AudioManager.STREAM_VOICE_CALL)
             this.streamType = streamType;
         else
-            throw new IllegalArgumentException("Stream type is incorrect");
+            throw new RuntimeException("Stream type is incorrect");
     }
 
     public void initAudioManager(AudioManager audioManager) {

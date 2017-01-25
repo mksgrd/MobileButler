@@ -16,7 +16,7 @@ public class StreamController {
         if (streamSparseArray.get(streamType) == null)
             streamSparseArray.put(streamType, new AudioStream(streamType, audioManager));
         else
-            throw new IllegalArgumentException("Stream has already controlled");
+            throw new RuntimeException("Stream has already controlled");
     }
 
     public void disableStreamControl(int streamType) {
