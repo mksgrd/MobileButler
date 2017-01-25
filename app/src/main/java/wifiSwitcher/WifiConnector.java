@@ -7,9 +7,8 @@ import android.net.wifi.WifiManager;
 import java.util.List;
 
 public class WifiConnector {
-    public static final int NETWORK_TYPE_WEP = 1;
-    public static final int NETWORK_TYPE_WPA = 2;
-    public static final int NETWORK_TYPE_OPEN = 3;
+    public static final int NETWORK_TYPE_WEP_WPA = 1;
+    public static final int NETWORK_TYPE_OPEN = 2;
     private WifiManager wifiManager = null;
 
     private void checkWifiManager() {
@@ -22,19 +21,20 @@ public class WifiConnector {
     }
 
     public void connect(String networkSSID, String networkPass, int networkType) {
-        checkWifiManager();
+        if (!isWifiEnabled())
+            throw new RuntimeException("Wifi is not enabled");
 
         WifiConfiguration wifiConfiguration = new WifiConfiguration();
         wifiConfiguration.SSID = "\"" + networkSSID + "\"";
 
-        if (networkType == NETWORK_TYPE_WEP) {
+        if (networkType == NETWORK_TYPE_WEP_WPA) {
             wifiConfiguration.wepKeys[0] = "\"" + networkPass + "\"";
             wifiConfiguration.wepTxKeyIndex = 0;
             wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
             wifiConfiguration.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
-        } else if (networkType == NETWORK_TYPE_WPA)
+
             wifiConfiguration.preSharedKey = "\"" + networkPass + "\"";
-        else if (networkType == NETWORK_TYPE_OPEN)
+        } else if (networkType == NETWORK_TYPE_OPEN)
             wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
         else
             throw new IllegalArgumentException("Network type is incorrect");
