@@ -1,4 +1,4 @@
-package eventManager;
+package scheduler;
 
 import java.util.Calendar;
 import java.util.TimerTask;

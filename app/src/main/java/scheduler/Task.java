@@ -1,4 +1,4 @@
-package eventManager;
+package scheduler;
 
 public abstract class Task {
     private final Event startEvent = new Event() {

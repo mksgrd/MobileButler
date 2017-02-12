@@ -1,4 +1,4 @@
-package eventManager;
+package scheduler;
 
 public class TaskScheduler {
     private final EventScheduler eventScheduler = new EventScheduler();

@@ -1,9 +1,4 @@
-package profileManager;
-
-import eventManager.Event;
-import eventManager.EventScheduler;
-import eventManager.Task;
-import eventManager.TaskScheduler;
+package scheduler;
 
 public class ProfileEvent extends Event {
     private final EventScheduler eventScheduler = new EventScheduler();

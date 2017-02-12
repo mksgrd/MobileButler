@@ -1,7 +1,4 @@
-package profileManager;
-
-import eventManager.Event;
-import eventManager.Task;
+package scheduler;
 
 import java.util.ArrayList;
 

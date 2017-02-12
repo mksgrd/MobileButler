@@ -1,4 +1,4 @@
-package eventManager;
+package scheduler;
 
 import java.util.ArrayList;
 import java.util.Calendar;
