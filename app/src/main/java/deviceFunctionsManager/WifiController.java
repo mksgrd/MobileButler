@@ -1,4 +1,4 @@
-package wifiSwitcher;
+package deviceFunctionsManager;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
@@ -6,7 +6,7 @@ import android.net.wifi.WifiManager;
 
 import java.util.List;
 
-public class WifiConnector {
+public class WifiController {
     public static final int NETWORK_TYPE_WEP_WPA = 1;
     public static final int NETWORK_TYPE_OPEN = 2;
     private WifiManager wifiManager = null;
@@ -32,7 +32,6 @@ public class WifiConnector {
             wifiConfiguration.wepTxKeyIndex = 0;
             wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
             wifiConfiguration.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
-
             wifiConfiguration.preSharedKey = "\"" + networkPass + "\"";
         } else if (networkType == NETWORK_TYPE_OPEN)
             wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
