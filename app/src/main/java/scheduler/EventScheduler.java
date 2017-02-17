@@ -22,6 +22,11 @@ public class EventScheduler {
             timer.schedule(event, waitUntilRun);
     }
 
+    public void scheduleAll(Event... events) {
+        for (Event event : events)
+            scheduleEvent(event);
+    }
+
     public void rescheduleAllEvents() {
         for (Event scheduledEvent : scheduledEvents)
             scheduleEvent(scheduledEvent);

@@ -8,6 +8,11 @@ public class TaskScheduler {
         eventScheduler.scheduleEvent(task.getStopEvent());
     }
 
+    public void scheduleAllTasks(Task... tasks) {
+        for (Task task : tasks)
+            scheduleTask(task);
+    }
+
     public void rescheduleAllTasks() {
         eventScheduler.rescheduleAllEvents();
     }
