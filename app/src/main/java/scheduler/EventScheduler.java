@@ -22,7 +22,7 @@ public class EventScheduler {
             timer.schedule(event, waitUntilRun);
     }
 
-    public void scheduleAll(Event... events) {
+    public void scheduleAllEvents(Event... events) {
         for (Event event : events)
             scheduleEvent(event);
     }
