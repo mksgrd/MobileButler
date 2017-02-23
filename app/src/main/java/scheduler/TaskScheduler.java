@@ -1,11 +1,9 @@
 package scheduler;
 
-public class TaskScheduler {
-    private final EventScheduler eventScheduler = new EventScheduler();
-
+public class TaskScheduler extends EventScheduler {
     public void scheduleTask(Task task) {
-        eventScheduler.scheduleEvent(task.getStartEvent());
-        eventScheduler.scheduleEvent(task.getStopEvent());
+        scheduleEvent(task.getStartEvent());
+        scheduleEvent(task.getStopEvent());
     }
 
     public void scheduleAllTasks(Task... tasks) {
@@ -14,15 +12,15 @@ public class TaskScheduler {
     }
 
     public void rescheduleAllTasks() {
-        eventScheduler.rescheduleAllEvents();
+        rescheduleAllEvents();
     }
 
     public void cancelTask(Task task) {
-        eventScheduler.cancelEvent(task.getStartEvent());
-        eventScheduler.cancelEvent(task.getStopEvent());
+        cancelEvent(task.getStartEvent());
+        cancelEvent(task.getStopEvent());
     }
 
     public void cancelAllTasks() {
-        eventScheduler.cancelAllEvents();
+        cancelAllEvents();
     }
 }
