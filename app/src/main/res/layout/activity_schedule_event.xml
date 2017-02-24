@@ -11,4 +11,23 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         tools:context="com.maksg.mobilebutler.ScheduleEventActivity">
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:text="Выберите действие для нового события ниже. Вы можете запланированно изменять параметры настроек с помощью событий."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:textAlignment="center"
+                android:textStyle="normal|bold"
+                android:layout_marginBottom="10dp"/>
+
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/listView"/>
+    </LinearLayout>
 </RelativeLayout>
