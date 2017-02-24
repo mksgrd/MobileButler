@@ -26,27 +26,31 @@
                 android:layout_gravity="fill"
                 android:layout_columnSpan="2"
                 android:layout_width="160dp"
-                android:id="@+id/scheduleEventButton"/>
+                android:id="@+id/scheduleEventButton"
+                android:onClick="onScheduleButtonClick"/>
 
         <Button
                 android:text="Запланировать задачу"
                 android:layout_gravity="fill"
                 android:layout_columnSpan="2"
                 android:layout_width="160dp"
-                android:id="@+id/scheduleTaskButton"/>
+                android:id="@+id/scheduleTaskButton"
+                android:onClick="onTaskButtonClick"/>
 
         <Button
                 android:text="Текущий профиль"
                 android:layout_gravity="fill"
                 android:layout_columnSpan="2"
                 android:id="@+id/currentProfileButton"
-                android:layout_width="160dp"/>
+                android:layout_width="160dp"
+                android:onClick="onCurrentProfileButtonClick"/>
 
         <Button
                 android:text="Конфигуратор профилей"
                 android:layout_gravity="fill"
                 android:layout_columnSpan="2"
                 android:layout_width="160dp"
-                android:id="@+id/configureProfileButton"/>
+                android:id="@+id/configureProfileButton"
+                android:onClick="onConfigureProfileButtonClick"/>
     </GridLayout>
 </RelativeLayout>
