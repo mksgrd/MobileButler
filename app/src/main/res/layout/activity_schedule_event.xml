@@ -31,12 +31,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:columnCount="4"
-                android:rowCount="3"
+                android:rowCount="4"
                 android:orientation="horizontal"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="30dp">
 
             <TextView
                     android:text="Выбранное время"
@@ -85,21 +85,25 @@
                     android:layout_width="160dp"
                     android:id="@+id/pointActionButton"
                     android:onClick="onPointActionButtonClick"/>
+
+            <CheckBox
+                    android:text="Повторение"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox"
+                    android:layout_gravity="fill"
+                    android:layout_columnSpan="2"
+                    android:layout_width="160dp"
+                    android:layout_marginTop="15dp"/>
+
+            <Spinner
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner"
+                    android:entries="@array/activity_schedule_event_spinner_names"
+                    android:layout_gravity="fill"
+                    android:layout_columnSpan="2"
+                    android:layout_width="160dp"
+                    android:layout_marginTop="15dp"/>
         </GridLayout>
-
-        <CheckBox
-                android:text="Повторять действие"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/checkBox"
-                android:layout_marginBottom="10dp"/>
-
-        <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner"
-                android:entries="@array/activity_schedule_event_spinner_names"
-                android:layout_marginBottom="30dp"/>
 
         <Button
                 android:text="Создать событие"

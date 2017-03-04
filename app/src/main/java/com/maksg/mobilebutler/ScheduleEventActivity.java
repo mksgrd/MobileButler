@@ -80,7 +80,6 @@ public class ScheduleEventActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, onDateSetListener,
                 dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.setTitle("Укажите желаемую дату");
-        datePickerDialog.getDatePicker().setMinDate(dateTime.getTimeInMillis());
         datePickerDialog.show();
     }
 
