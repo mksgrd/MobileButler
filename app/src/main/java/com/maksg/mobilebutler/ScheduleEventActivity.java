@@ -13,19 +13,37 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 public class ScheduleEventActivity extends AppCompatActivity {
-    private Calendar currentDateTime = Calendar.getInstance();
+    private Calendar dateTime = Calendar.getInstance();
     private TextView selectedTime, selectedDate, selectedAction;
+
     private TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            dateTime.set(Calendar.MINUTE, minute);
+            setSelectedDateTime();
         }
     };
+
     private DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         }
     };
+
+    private void setSelectedDateTime() {
+        String formattedTime = "Выбранное время:\n" +
+                DateUtils.formatDateTime(this, dateTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
+
+        selectedTime.setText(formattedTime);
+
+        String formattedDate = "Выбранная дата:\n" +
+                DateUtils.formatDateTime(this, dateTime.getTimeInMillis(),
+                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
+
+        selectedDate.setText(formattedDate);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +54,13 @@ public class ScheduleEventActivity extends AppCompatActivity {
         selectedDate = (TextView) findViewById(R.id.selectedDateTextView);
         selectedAction = (TextView) findViewById(R.id.selectedActionTextView);
 
-        String formattedTime = "Выбранное время:\n" +
-                DateUtils.formatDateTime(this, currentDateTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-
-        selectedTime.setText(formattedTime);
-
-        String formattedDate = "Выбранная дата:\n" +
-                DateUtils.formatDateTime(this, currentDateTime.getTimeInMillis(),
-                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
-
-        selectedDate.setText(formattedDate);
+        setSelectedDateTime();
     }
 
     public void onPointTimeButtonClick(View view) {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener,
-                currentDateTime.get(Calendar.HOUR_OF_DAY), currentDateTime.get(Calendar.MINUTE), true);
-        timePickerDialog.setTitle("Выберите желаемое время");
+                dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), true);
+        timePickerDialog.setTitle("Укажите желаемое время");
         timePickerDialog.show();
     }
 
