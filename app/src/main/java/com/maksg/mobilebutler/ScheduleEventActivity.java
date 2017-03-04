@@ -6,15 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.TextView;
-import android.widget.TimePicker;
+import android.widget.*;
 
 import java.util.Calendar;
 
 public class ScheduleEventActivity extends AppCompatActivity {
     private Calendar dateTime = Calendar.getInstance();
     private TextView selectedTime, selectedDate, selectedAction;
+    private Spinner spinner;
 
     private TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
@@ -32,6 +31,13 @@ public class ScheduleEventActivity extends AppCompatActivity {
             dateTime.set(Calendar.MONTH, month);
             dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             updateDateTimeTextViews();
+        }
+    };
+
+    private CheckBox.OnCheckedChangeListener onCheckBoxCheckedListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            spinner.setEnabled(isChecked);
         }
     };
 
@@ -54,8 +60,13 @@ public class ScheduleEventActivity extends AppCompatActivity {
         selectedTime = (TextView) findViewById(R.id.selectedTimeTextView);
         selectedDate = (TextView) findViewById(R.id.selectedDateTextView);
         selectedAction = (TextView) findViewById(R.id.selectedActionTextView);
-
         updateDateTimeTextViews();
+
+        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
+        checkBox.setOnCheckedChangeListener(onCheckBoxCheckedListener);
+
+        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setEnabled(false);
     }
 
     public void onPointTimeButtonClick(View view) {
