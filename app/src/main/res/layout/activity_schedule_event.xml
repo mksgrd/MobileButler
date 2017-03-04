@@ -43,7 +43,8 @@
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_columnSpan="2"
-                    android:layout_width="160dp"/>
+                    android:layout_width="160dp"
+                    android:id="@+id/selectedTimeTextView"/>
 
             <Button
                     android:text="Указать время"
@@ -58,7 +59,8 @@
                     android:layout_gravity="center"
                     android:layout_columnSpan="2"
                     android:layout_width="160dp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:id="@+id/selectedDateTextView"/>
 
             <Button
                     android:text="Указать дату"
@@ -73,7 +75,8 @@
                     android:layout_gravity="center"
                     android:layout_columnSpan="2"
                     android:layout_width="160dp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:id="@+id/selectedActionTextView"/>
 
             <Button
                     android:text="Указать действие"
