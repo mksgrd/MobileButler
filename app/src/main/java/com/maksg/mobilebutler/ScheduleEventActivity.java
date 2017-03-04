@@ -21,27 +21,28 @@ public class ScheduleEventActivity extends AppCompatActivity {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             dateTime.set(Calendar.MINUTE, minute);
-            setSelectedDateTime();
+            updateDateTimeTextViews();
         }
     };
 
     private DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
+            dateTime.set(Calendar.YEAR, year);
+            dateTime.set(Calendar.MONTH, month);
+            dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateDateTimeTextViews();
         }
     };
 
-    private void setSelectedDateTime() {
+    private void updateDateTimeTextViews() {
         String formattedTime = "Выбранное время:\n" +
                 DateUtils.formatDateTime(this, dateTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-
         selectedTime.setText(formattedTime);
 
         String formattedDate = "Выбранная дата:\n" +
                 DateUtils.formatDateTime(this, dateTime.getTimeInMillis(),
                         DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
-
         selectedDate.setText(formattedDate);
     }
 
@@ -54,7 +55,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
         selectedDate = (TextView) findViewById(R.id.selectedDateTextView);
         selectedAction = (TextView) findViewById(R.id.selectedActionTextView);
 
-        setSelectedDateTime();
+        updateDateTimeTextViews();
     }
 
     public void onPointTimeButtonClick(View view) {
@@ -65,6 +66,11 @@ public class ScheduleEventActivity extends AppCompatActivity {
     }
 
     public void onPointDateButtonClick(View view) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, onDateSetListener,
+                dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.setTitle("Укажите желаемую дату");
+        datePickerDialog.getDatePicker().setMinDate(dateTime.getTimeInMillis());
+        datePickerDialog.show();
     }
 
     public void onPointActionButtonClick(View view) {
