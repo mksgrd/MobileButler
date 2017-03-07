@@ -2,6 +2,7 @@ package com.maksg.mobilebutler;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
@@ -84,6 +85,8 @@ public class ScheduleEventActivity extends AppCompatActivity {
     }
 
     public void onPointActionButtonClick(View view) {
+        Intent intent = new Intent(this, ChooseActionActivity.class);
+        startActivity(intent);
     }
 
     public void onCreateEventButtonClick(View view) {
