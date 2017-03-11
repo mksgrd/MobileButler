@@ -20,7 +20,7 @@
             android:layout_alignParentStart="true">
 
         <TextView
-                android:text="Выберите действие из списка ниже"
+                android:text="Выберите действие, которое будет совершено в указанные дату и вреия"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2"
@@ -31,7 +31,8 @@
                 android:text="Изменение настроек звука"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"/>
+                android:id="@+id/changeSoundSettingsButton"
+                android:onClick="onChangeSoundSettingsButtonClick"/>
 
         <Button
                 android:text="Изменение настроек Bluetooth"

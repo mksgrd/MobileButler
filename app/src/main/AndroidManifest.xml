@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".ChooseActionActivity">
         </activity>
+        <activity android:name=".ChangeSoundSettingsActivity">
+        </activity>
     </application>
 
 </manifest>
