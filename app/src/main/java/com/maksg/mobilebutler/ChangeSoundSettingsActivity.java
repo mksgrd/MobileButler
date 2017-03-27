@@ -2,8 +2,10 @@ package com.maksg.mobilebutler;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import deviceFunctionsManager.AudioController;
 
 public class ChangeSoundSettingsActivity extends AppCompatActivity {
     private TextView alarmTextView, musicTextView, notificationTextView, ringtoneTextView, systemTextView;
@@ -59,10 +61,34 @@ public class ChangeSoundSettingsActivity extends AppCompatActivity {
         ringtoneSeekBar = (SeekBar) findViewById(R.id.ringtoneSeekBar);
         systemSeekBar = (SeekBar) findViewById(R.id.systemSeekBar);
 
+        setupSeekBars();
+    }
+
+    private void setupSeekBars() {
+        AudioController audioController = new AudioController();
+        audioController.setContext(this);
+
         alarmSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        alarmSeekBar.setProgress(audioController.getAlarmVolume());
+        alarmSeekBar.setMax(audioController.getAlarmMaxVolume());
+
         musicSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        musicSeekBar.setProgress(audioController.getMusicVolume());
+        musicSeekBar.setMax(audioController.getMusicMaxVolume());
+
         notificationSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        notificationSeekBar.setProgress(audioController.getNotificationVolume());
+        notificationSeekBar.setMax(audioController.getNotificationMaxVolume());
+
         ringtoneSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        ringtoneSeekBar.setProgress(audioController.getRingtoneVolume());
+        ringtoneSeekBar.setMax(audioController.getRingtoneMaxVolume());
+
         systemSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        systemSeekBar.setProgress(audioController.getSystemVolume());
+        systemSeekBar.setMax(audioController.getSystemMaxVolume());
+    }
+
+    public void onApplySettingsButtonClicked(View view) {
     }
 }
