@@ -11,46 +11,61 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.maksg.mobilebutler.MainActivity">
 
-    <GridLayout
-            android:layout_width="wrap_content"
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:columnCount="4"
-            android:rowCount="2"
-            android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-        <Button
-                android:text="Запланировать событие"
-                android:layout_gravity="fill"
-                android:layout_columnSpan="2"
-                android:layout_width="160dp"
-                android:id="@+id/scheduleEventButton"
-                android:onClick="onScheduleButtonClick"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <Button
-                android:text="Запланировать задачу"
-                android:layout_gravity="fill"
-                android:layout_columnSpan="2"
-                android:layout_width="160dp"
-                android:id="@+id/scheduleTaskButton"
-                android:onClick="onTaskButtonClick"/>
+            <Button
+                    android:text="Запланировать событие"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:id="@+id/scheduleEventButton"
+                    android:onClick="onScheduleEventButtonClick"/>
 
-        <Button
-                android:text="Текущий профиль"
-                android:layout_gravity="fill"
-                android:layout_columnSpan="2"
-                android:id="@+id/currentProfileButton"
-                android:layout_width="160dp"
-                android:onClick="onCurrentProfileButtonClick"/>
+            <Button
+                    android:text="Запланировать задачу"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/scheduleTaskButton"
+                    android:layout_weight="1"
+                    android:onClick="onScheduleTaskButtonClick"/>
+        </LinearLayout>
 
-        <Button
-                android:text="Конфигуратор профилей"
-                android:layout_gravity="fill"
-                android:layout_columnSpan="2"
-                android:layout_width="160dp"
-                android:id="@+id/configureProfileButton"
-                android:onClick="onConfigureProfileButtonClick"/>
-    </GridLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <Button
+                    android:text="Конфигуратор профилей"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/configureProfileButton"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:onClick="onConfigureProfileButtonClick"/>
+
+            <Button
+                    android:text="Текущий профиль"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/currentProfileButton"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:onClick="onCurrentProfileButtonClick"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </RelativeLayout>
