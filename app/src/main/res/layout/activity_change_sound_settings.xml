@@ -14,57 +14,82 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-        <LinearLayout
-                android:orientation="horizontal"
+        <TextView
+                android:text="Громкость предупреждений"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:id="@+id/alarmTextView"
+                android:textAlignment="center"/>
 
-            <TextView
-                    android:text="Звук сообщений"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/textView6"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"/>
-
-            <SeekBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/seekBar4"
-                    android:layout_weight="10"
-                    android:layout_gravity="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:orientation="horizontal"
+        <SeekBar
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="44dp"
-                android:layout_below="@+id/linearLayout2"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_height="wrap_content"
+                android:id="@+id/alarmSeekBar"
+                android:layout_marginBottom="10dp"/>
 
-            <TextView
-                    android:text="Звук сообщений"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/textView99"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"/>
+        <TextView
+                android:text="Громкость музыки"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/musicTextView"
+                android:textAlignment="center"/>
 
-            <SeekBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/seekBar99"
-                    android:layout_weight="10"
-                    android:layout_gravity="center"/>
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/musicSeekBar"
+                android:layout_marginBottom="10dp"/>
 
-        </LinearLayout>
+        <TextView
+                android:text="Громкость оповещений"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/notificationTextView"
+                android:textAlignment="center"/>
+
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/notificationSeekBar"
+                android:layout_marginBottom="10dp"/>
+
+        <TextView
+                android:text="Громкость мелодии звонка"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ringtoneTextView"
+                android:textAlignment="center"/>
+
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ringtoneSeekBar"
+                android:layout_marginBottom="10dp"/>
+
+        <TextView
+                android:text="Громкость системных звуков"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/systemTextView"
+                android:textAlignment="center"/>
+
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/systemSeekBar"
+                android:layout_marginBottom="10dp"/>
+
+        <Button
+                android:text="Применить"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/applySettingsButton"/>
+
     </LinearLayout>
 
 </RelativeLayout>
