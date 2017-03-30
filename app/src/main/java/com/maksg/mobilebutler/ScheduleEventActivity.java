@@ -13,7 +13,7 @@ import java.util.Calendar;
 
 public class ScheduleEventActivity extends AppCompatActivity {
     private Calendar dateTime = Calendar.getInstance();
-    private TextView selectedTime, selectedDate, selectedAction;
+    private TextView selectedTime, selectedDate;
     private Spinner spinner;
 
     private TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
@@ -60,7 +60,6 @@ public class ScheduleEventActivity extends AppCompatActivity {
 
         selectedTime = (TextView) findViewById(R.id.selectedTimeTextView);
         selectedDate = (TextView) findViewById(R.id.selectedDateTextView);
-        selectedAction = (TextView) findViewById(R.id.selectedActionTextView);
         updateDateTimeTextViews();
 
         CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
