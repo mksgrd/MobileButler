@@ -1,5 +1,6 @@
 package com.maksg.mobilebutler;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -90,5 +91,21 @@ public class ChangeSoundSettingsActivity extends AppCompatActivity {
     }
 
     public void onApplySettingsButtonClicked(View view) {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.remove("alarm_volume");
+        editor.remove("music_volume");
+        editor.remove("notification_volume");
+        editor.remove("ringtone_volume");
+        editor.remove("system_volume");
+
+        editor.putInt("alarm_volume", alarmSeekBar.getProgress());
+        editor.putInt("music_volume", musicSeekBar.getProgress());
+        editor.putInt("notification_volume", notificationSeekBar.getProgress());
+        editor.putInt("ringtone_volume", ringtoneSeekBar.getProgress());
+        editor.putInt("system_volume", systemSeekBar.getProgress());
+
+        editor.apply();
     }
 }
