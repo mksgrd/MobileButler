@@ -20,7 +20,7 @@
             android:layout_alignParentStart="true">
 
         <TextView
-                android:text="Выберите действие, которое будет совершено в указанные дату и вреия"
+                android:text="Выберите действия, которые будут совершены в указанные дату и время"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2"

@@ -14,7 +14,7 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
@@ -83,6 +83,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/systemSeekBar"
                 android:layout_marginBottom="10dp"/>
+
+        <Switch
+                android:text="Полностью отключить звук"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switch3"
+                android:layout_marginBottom="15dp"
+                android:checked="false"/>
 
         <Button
                 android:text="Применить"

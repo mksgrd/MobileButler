@@ -20,7 +20,7 @@
             android:layout_alignParentStart="true">
 
         <TextView
-                android:text="Выберите время, дату и действие, которое будет совершено в указанный срок"
+                android:text="Выберите время, дату и действия, которое будет совершено в указанный срок"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
@@ -76,7 +76,7 @@
         </LinearLayout>
 
         <Button
-                android:text="Указать действие"
+                android:text="Выбрать действия"
                 android:layout_gravity="fill"
                 android:layout_width="match_parent"
                 android:id="@+id/pointActionButton"
