@@ -10,6 +10,10 @@ public class BluetoothController {
             throw new RuntimeException("Device does not support Bluetooth");
     }
 
+    public boolean getBluetoothState() {
+        return bluetoothAdapter.isEnabled();
+    }
+
     public void setBluetoothState(boolean state) {
         boolean isEnabled = bluetoothAdapter.isEnabled();
         if (state && !isEnabled)
