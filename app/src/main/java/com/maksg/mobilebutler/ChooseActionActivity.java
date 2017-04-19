@@ -100,11 +100,11 @@ public class ChooseActionActivity extends AppCompatActivity {
         disableAllSoundsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                alarmSeekBar.setEnabled(isChecked);
-                musicSeekBar.setEnabled(isChecked);
-                notificationSeekBar.setEnabled(isChecked);
-                ringtoneSeekBar.setEnabled(isChecked);
-                systemSeekBar.setEnabled(isChecked);
+                alarmSeekBar.setEnabled(!isChecked);
+                musicSeekBar.setEnabled(!isChecked);
+                notificationSeekBar.setEnabled(!isChecked);
+                ringtoneSeekBar.setEnabled(!isChecked);
+                systemSeekBar.setEnabled(!isChecked);
             }
         });
 
@@ -116,14 +116,10 @@ public class ChooseActionActivity extends AppCompatActivity {
     }
 
     public void onApplySettingsButtonClicked(View view) {
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("SharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.remove("alarm_volume");
-        editor.remove("music_volume");
-        editor.remove("notification_volume");
-        editor.remove("ringtone_volume");
-        editor.remove("system_volume");
+        editor.clear();
 
         if (disableAllSoundsSwitch.isChecked()) {
             editor.putInt("alarm_volume", 0);
@@ -143,5 +139,6 @@ public class ChooseActionActivity extends AppCompatActivity {
         editor.putBoolean("bluetooth_state", bluetoothSwitch.isChecked());
 
         editor.apply();
+        finish();
     }
 }

@@ -3,11 +3,17 @@ package com.maksg.mobilebutler;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.*;
+import deviceFunctionsManager.AudioController;
+import deviceFunctionsManager.BluetoothController;
+import deviceFunctionsManager.WifiController;
+import scheduler.Event;
+import scheduler.EventScheduler;
 
 import java.util.Calendar;
 
@@ -15,6 +21,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
     private Calendar dateTime = Calendar.getInstance();
     private TextView selectedTime, selectedDate;
     private Spinner spinner;
+    private EventScheduler eventScheduler = new EventScheduler();
 
     private TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
@@ -89,5 +96,32 @@ public class ScheduleEventActivity extends AppCompatActivity {
     }
 
     public void onCreateEventButtonClick(View view) {
+        final SharedPreferences sharedPreferences = getSharedPreferences("SharedPref", MODE_PRIVATE);
+
+        final AudioController audioController = new AudioController();
+        audioController.setContext(this);
+
+        final BluetoothController bluetoothController = new BluetoothController();
+
+        final WifiController wifiController = new WifiController();
+        wifiController.setContext(this);
+
+        Event event = new Event() {
+            @Override
+            public void run() {
+                audioController.setAlarmVolume(sharedPreferences.getInt("alarm_volume", 1));
+                audioController.setMusicVolume(sharedPreferences.getInt("music_volume", 1));
+                audioController.setNotificationVolume(sharedPreferences.getInt("notification_volume", 1));
+                audioController.setRingtoneVolume(sharedPreferences.getInt("ringtone_volume", 1));
+                audioController.setSystemVolume(sharedPreferences.getInt("system_volume", 1));
+
+                wifiController.setWifiState(sharedPreferences.getBoolean("wifi_state", false));
+                bluetoothController.setBluetoothState(
+                        sharedPreferences.getBoolean("bluetooth_state", false));
+            }
+        };
+
+        event.setStartMoment(dateTime);
+        eventScheduler.scheduleEvent(event);
     }
 }
