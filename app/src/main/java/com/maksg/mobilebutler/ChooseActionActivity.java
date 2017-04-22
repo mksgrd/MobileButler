@@ -16,7 +16,6 @@ import android.widget.TextView;
 public class ChooseActionActivity extends AppCompatActivity {
     private TextView alarmTextView, musicTextView, notificationTextView, ringtoneTextView, systemTextView;
     private SeekBar alarmSeekBar, musicSeekBar, notificationSeekBar, ringtoneSeekBar, systemSeekBar;
-
     private Switch disableAllSoundsSwitch, wifiSwitch, bluetoothSwitch;
 
     private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
@@ -110,9 +109,8 @@ public class ChooseActionActivity extends AppCompatActivity {
     }
 
     public void onApplySettingsButtonClicked(View view) {
-        SharedPreferences sharedPreferences = getSharedPreferences("SharedPref", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("MobileButlerSP", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
         editor.clear();
 
         if (disableAllSoundsSwitch.isChecked()) {

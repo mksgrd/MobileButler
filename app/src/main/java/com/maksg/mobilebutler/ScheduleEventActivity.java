@@ -96,7 +96,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
     }
 
     public void onCreateEventButtonClick(View view) {
-        final SharedPreferences sharedPreferences = getSharedPreferences("SharedPref", MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = getSharedPreferences("MobileButlerSP", MODE_PRIVATE);
 
         final AudioController audioController = new AudioController();
         audioController.setContext(this);
