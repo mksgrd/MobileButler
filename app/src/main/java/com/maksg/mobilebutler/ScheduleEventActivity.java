@@ -3,17 +3,11 @@ package com.maksg.mobilebutler;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.*;
-import deviceFunctionsManager.AudioController;
-import deviceFunctionsManager.BluetoothController;
-import deviceFunctionsManager.WifiController;
-import scheduler.Event;
-import scheduler.EventScheduler;
 
 import java.util.Calendar;
 
@@ -21,33 +15,27 @@ public class ScheduleEventActivity extends AppCompatActivity {
     private Calendar dateTime = Calendar.getInstance();
     private TextView selectedTime, selectedDate;
     private Spinner spinner;
-    private EventScheduler eventScheduler = new EventScheduler();
 
-    private TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            dateTime.set(Calendar.MINUTE, minute);
-            updateDateTimeTextViews();
-        }
-    };
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_schedule_event);
 
-    private DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            dateTime.set(Calendar.YEAR, year);
-            dateTime.set(Calendar.MONTH, month);
-            dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateDateTimeTextViews();
-        }
-    };
+        selectedTime = (TextView) findViewById(R.id.selectedTimeTextView);
+        selectedDate = (TextView) findViewById(R.id.selectedDateTextView);
+        updateDateTimeTextViews();
 
-    private CheckBox.OnCheckedChangeListener onCheckBoxCheckedListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            spinner.setEnabled(isChecked);
-        }
-    };
+        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setEnabled(false);
+
+        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                spinner.setEnabled(isChecked);
+            }
+        });
+    }
 
     private void updateDateTimeTextViews() {
         String formattedTime = "Выбранное время:\n" +
@@ -60,23 +48,16 @@ public class ScheduleEventActivity extends AppCompatActivity {
         selectedDate.setText(formattedDate);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule_event);
-
-        selectedTime = (TextView) findViewById(R.id.selectedTimeTextView);
-        selectedDate = (TextView) findViewById(R.id.selectedDateTextView);
-        updateDateTimeTextViews();
-
-        CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
-        checkBox.setOnCheckedChangeListener(onCheckBoxCheckedListener);
-
-        spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setEnabled(false);
-    }
-
     public void onPointTimeButtonClick(View view) {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                dateTime.set(Calendar.MINUTE, minute);
+                updateDateTimeTextViews();
+            }
+        };
+
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener,
                 dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), true);
         timePickerDialog.setTitle("Укажите желаемое время");
@@ -84,6 +65,16 @@ public class ScheduleEventActivity extends AppCompatActivity {
     }
 
     public void onPointDateButtonClick(View view) {
+        DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                dateTime.set(Calendar.YEAR, year);
+                dateTime.set(Calendar.MONTH, month);
+                dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateDateTimeTextViews();
+            }
+        };
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, onDateSetListener,
                 dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.setTitle("Укажите желаемую дату");
@@ -96,7 +87,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
     }
 
     public void onCreateEventButtonClick(View view) {
-        final SharedPreferences sharedPreferences = getSharedPreferences("MobileButlerSP", MODE_PRIVATE);
+        /*final SharedPreferences sharedPreferences = getSharedPreferences("MobileButlerSP", MODE_PRIVATE);
 
         final AudioController audioController = new AudioController();
         audioController.setContext(this);
@@ -122,6 +113,6 @@ public class ScheduleEventActivity extends AppCompatActivity {
         };
 
         event.setStartMoment(dateTime);
-        eventScheduler.scheduleEvent(event);
+        eventScheduler.scheduleEvent(event);*/
     }
 }
