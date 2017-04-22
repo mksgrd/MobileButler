@@ -1,6 +1,10 @@
 package com.maksg.mobilebutler;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,9 +12,6 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import deviceFunctionsManager.AudioController;
-import deviceFunctionsManager.BluetoothController;
-import deviceFunctionsManager.WifiController;
 
 public class ChooseActionActivity extends AppCompatActivity {
     private TextView alarmTextView, musicTextView, notificationTextView, ringtoneTextView, systemTextView;
@@ -42,12 +43,10 @@ public class ChooseActionActivity extends AppCompatActivity {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-
         }
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-
         }
     };
 
@@ -56,13 +55,7 @@ public class ChooseActionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_action);
 
-        AudioController audioController = new AudioController();
-        audioController.setContext(this);
-
-        WifiController wifiController = new WifiController();
-        wifiController.setContext(this);
-
-        BluetoothController bluetoothController = new BluetoothController();
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         alarmTextView = (TextView) findViewById(R.id.alarmTextView);
         musicTextView = (TextView) findViewById(R.id.musicTextView);
@@ -71,30 +64,29 @@ public class ChooseActionActivity extends AppCompatActivity {
         systemTextView = (TextView) findViewById(R.id.systemTextView);
 
         alarmSeekBar = (SeekBar) findViewById(R.id.alarmSeekBar);
-        musicSeekBar = (SeekBar) findViewById(R.id.musicSeekBar);
-        notificationSeekBar = (SeekBar) findViewById(R.id.notificationSeekBar);
-        ringtoneSeekBar = (SeekBar) findViewById(R.id.ringtoneSeekBar);
-        systemSeekBar = (SeekBar) findViewById(R.id.systemSeekBar);
-
         alarmSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
-        alarmSeekBar.setProgress(audioController.getAlarmVolume());
-        alarmSeekBar.setMax(audioController.getAlarmMaxVolume());
+        alarmSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
+        alarmSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM));
 
+        musicSeekBar = (SeekBar) findViewById(R.id.musicSeekBar);
         musicSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
-        musicSeekBar.setProgress(audioController.getMusicVolume());
-        musicSeekBar.setMax(audioController.getMusicMaxVolume());
+        musicSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+        musicSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
 
+        notificationSeekBar = (SeekBar) findViewById(R.id.notificationSeekBar);
         notificationSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
-        notificationSeekBar.setProgress(audioController.getNotificationVolume());
-        notificationSeekBar.setMax(audioController.getNotificationMaxVolume());
+        notificationSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+        notificationSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION));
 
+        ringtoneSeekBar = (SeekBar) findViewById(R.id.ringtoneSeekBar);
         ringtoneSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
-        ringtoneSeekBar.setProgress(audioController.getRingtoneVolume());
-        ringtoneSeekBar.setMax(audioController.getRingtoneMaxVolume());
+        ringtoneSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_RING));
+        ringtoneSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_RING));
 
+        systemSeekBar = (SeekBar) findViewById(R.id.systemSeekBar);
         systemSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
-        systemSeekBar.setProgress(audioController.getSystemVolume());
-        systemSeekBar.setMax(audioController.getSystemMaxVolume());
+        systemSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
+        systemSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM));
 
         disableAllSoundsSwitch = (Switch) findViewById(R.id.disableAllSoundsSwitch);
         disableAllSoundsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -108,11 +100,13 @@ public class ChooseActionActivity extends AppCompatActivity {
             }
         });
 
+        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifiSwitch = (Switch) findViewById(R.id.wifiSwitch);
-        wifiSwitch.setChecked(wifiController.isWifiEnabled());
+        wifiSwitch.setChecked(wifiManager.isWifiEnabled());
 
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothSwitch = (Switch) findViewById(R.id.bluetoothSwitch);
-        bluetoothSwitch.setChecked(bluetoothController.getBluetoothState());
+        bluetoothSwitch.setChecked(bluetoothAdapter.isEnabled());
     }
 
     public void onApplySettingsButtonClicked(View view) {
