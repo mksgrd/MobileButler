@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onScheduleEventButtonClick(View view) {
-        Intent intent = new Intent(this, ScheduleEventActivity.class);
+        Intent intent = new Intent(this, ChooseDateTimeActivity.class);
         startActivity(intent);
     }
 
