@@ -20,7 +20,7 @@
             android:layout_alignParentStart="true">
 
         <TextView
-                android:text="Выбранное ранее событие будет запущено в указанное ниже дату и время"
+                android:text="Измененные ранее настройки будут применены в указанные ниже дату и время"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView4"
@@ -51,6 +51,7 @@
                 android:text="Далее"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"/>
+                android:id="@+id/chooseDateTimeNextButton"
+                android:onClick="onChooseDateTimeNextButtonClick"/>
     </LinearLayout>
 </RelativeLayout>
