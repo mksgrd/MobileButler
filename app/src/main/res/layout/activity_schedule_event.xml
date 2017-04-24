@@ -20,7 +20,7 @@
             android:layout_alignParentStart="true">
 
         <TextView
-                android:text="Выберите время, дату и действия, которые будут совершены в указанный срок"
+                android:text="Событие успешно сформировано. Вы можете корректировать любые его параметры"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
@@ -34,7 +34,7 @@
 
             <TextView
                     android:text="Выбранное время"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:id="@+id/selectedTimeTextView"
@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"/>
 
             <Button
-                    android:text="Указать время"
+                    android:text="Изменить время"
                     android:layout_gravity="fill"
                     android:layout_width="match_parent"
                     android:id="@+id/pointTimeButton"
@@ -60,13 +60,13 @@
                     android:text="Выбранная дата"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:id="@+id/selectedDateTextView"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
 
             <Button
-                    android:text="Указать дату"
+                    android:text="Изменить дату"
                     android:layout_gravity="fill"
                     android:layout_width="match_parent"
                     android:id="@+id/pointDateButton"
@@ -76,7 +76,7 @@
         </LinearLayout>
 
         <Button
-                android:text="Выбрать действия"
+                android:text="Изменить настройки"
                 android:layout_gravity="fill"
                 android:layout_width="match_parent"
                 android:id="@+id/pointActionButton"
