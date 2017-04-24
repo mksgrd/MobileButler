@@ -15,8 +15,8 @@ import scheduler.SettingsChangeTask;
 import java.util.Calendar;
 
 public class ChooseDateTimeActivity extends AppCompatActivity {
+    private final Calendar dateTime = Calendar.getInstance();
     private SettingsChangeTask settingsChangeTask;
-    private Calendar dateTime = Calendar.getInstance();
     private TextView selectedDateTime;
 
     @Override

@@ -18,10 +18,7 @@ public class ChooseActionActivity extends AppCompatActivity {
     private SettingsChangeTask settingsChangeTask;
 
     private TextView alarmTextView, musicTextView, notificationTextView, ringtoneTextView, systemTextView;
-    private SeekBar alarmSeekBar, musicSeekBar, notificationSeekBar, ringtoneSeekBar, systemSeekBar;
-    private Switch disableAllSoundsSwitch, wifiSwitch, bluetoothSwitch;
-
-    private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+    private final SeekBar.OnSeekBarChangeListener onSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             switch (seekBar.getId()) {
@@ -51,6 +48,8 @@ public class ChooseActionActivity extends AppCompatActivity {
         public void onStopTrackingTouch(SeekBar seekBar) {
         }
     };
+    private SeekBar alarmSeekBar, musicSeekBar, notificationSeekBar, ringtoneSeekBar, systemSeekBar;
+    private Switch disableAllSoundsSwitch, wifiSwitch, bluetoothSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
