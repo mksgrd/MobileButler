@@ -4,56 +4,113 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
-import android.util.SparseIntArray;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SettingsChangeTask extends TimerTask implements Serializable {
-    public static final int ALARM_VOLUME = 0;
-    public static final int MUSIC_VOLUME = 1;
-    public static final int NOTIFICATION_VOLUME = 2;
-    public static final int RINGTONE_VOLUME = 3;
-    public static final int SYSTEM_VOLUME = 4;
-    public static final int WIFI_STATE = 5;
-    public static final int BLUETOOTH_STATE = 6;
+public class SettingsChangeTask extends TimerTask implements Parcelable {
+    public static final Creator<SettingsChangeTask> CREATOR = new Creator<SettingsChangeTask>() {
+        @Override
+        public SettingsChangeTask createFromParcel(Parcel in) {
+            return new SettingsChangeTask(in);
+        }
 
+        @Override
+        public SettingsChangeTask[] newArray(int size) {
+            return new SettingsChangeTask[size];
+        }
+    };
+    private int alarmVolume, musicVolume, notificationVolume, ringtoneVolume, systemVolume;
+    private boolean wifiState, bluetoothState;
     private Calendar startMoment = Calendar.getInstance();
     private Timer timer = new Timer();
-    private SparseIntArray settings = new SparseIntArray();
     private AudioManager audioManager;
     private WifiManager wifiManager;
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-    public SettingsChangeTask(Context context) {
-        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+    public SettingsChangeTask() {
     }
 
-    @Override
-    public void run() {
-        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, settings.get(ALARM_VOLUME), 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, settings.get(MUSIC_VOLUME), 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, settings.get(NOTIFICATION_VOLUME), 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_RING, settings.get(RINGTONE_VOLUME), 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, settings.get(SYSTEM_VOLUME), 0);
+    private SettingsChangeTask(Parcel in) {
+        alarmVolume = in.readInt();
+        musicVolume = in.readInt();
+        notificationVolume = in.readInt();
+        ringtoneVolume = in.readInt();
+        systemVolume = in.readInt();
+        wifiState = in.readByte() != 0;
+        bluetoothState = in.readByte() != 0;
+    }
 
-        wifiManager.setWifiEnabled(settings.get(WIFI_STATE) == 1);
+    public void setAlarmVolume(int alarmVolume) {
+        this.alarmVolume = alarmVolume;
+    }
 
-        if (settings.get(BLUETOOTH_STATE) == 1)
-            bluetoothAdapter.enable();
-        else
-            bluetoothAdapter.disable();
+    public void setMusicVolume(int musicVolume) {
+        this.musicVolume = musicVolume;
+    }
+
+    public void setNotificationVolume(int notificationVolume) {
+        this.notificationVolume = notificationVolume;
+    }
+
+    public void setRingtoneVolume(int ringtoneVolume) {
+        this.ringtoneVolume = ringtoneVolume;
+    }
+
+    public void setSystemVolume(int systemVolume) {
+        this.systemVolume = systemVolume;
+    }
+
+    public void setWifiState(boolean wifiState) {
+        this.wifiState = wifiState;
+    }
+
+    public void setBluetoothState(boolean bluetoothState) {
+        this.bluetoothState = bluetoothState;
     }
 
     public void setStartMoment(Calendar startMoment) {
         this.startMoment = startMoment;
     }
 
-    public void putSettings(int key, int value) {
-        settings.put(key, value);
+    public void setContext(Context context) {
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(alarmVolume);
+        dest.writeInt(musicVolume);
+        dest.writeInt(notificationVolume);
+        dest.writeInt(ringtoneVolume);
+        dest.writeInt(systemVolume);
+        dest.writeByte((byte) (wifiState ? 1 : 0));
+        dest.writeByte((byte) (bluetoothState ? 1 : 0));
+    }
+
+    @Override
+    public void run() {
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, alarmVolume, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, musicVolume, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, notificationVolume, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_RING, ringtoneVolume, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, systemVolume, 0);
+
+        wifiManager.setWifiEnabled(wifiState);
+
+        if (bluetoothState)
+            bluetoothAdapter.enable();
+        else
+            bluetoothAdapter.disable();
     }
 
     public void schedule() {
