@@ -24,7 +24,7 @@ public class ChooseDateTimeActivity extends AppCompatActivity {
         datePicker = (DatePicker) findViewById(R.id.datePicker);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
 
-        settingsChangeTask = (SettingsChangeTask) getIntent().getSerializableExtra("Task");
+        settingsChangeTask = getIntent().getParcelableExtra("Task");
     }
 
     public void onChooseDateTimeNextButtonClick(View view) {

@@ -57,7 +57,7 @@ public class ChooseActionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_action);
 
-        settingsChangeTask = (SettingsChangeTask) getIntent().getSerializableExtra("Task");
+        settingsChangeTask = getIntent().getParcelableExtra("Task");
 
         AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
@@ -122,13 +122,13 @@ public class ChooseActionActivity extends AppCompatActivity {
             systemSeekBar.setProgress(0);
         }
 
-        settingsChangeTask.putSettings(SettingsChangeTask.ALARM_VOLUME, alarmSeekBar.getProgress());
-        settingsChangeTask.putSettings(SettingsChangeTask.MUSIC_VOLUME, musicSeekBar.getProgress());
-        settingsChangeTask.putSettings(SettingsChangeTask.NOTIFICATION_VOLUME, notificationSeekBar.getProgress());
-        settingsChangeTask.putSettings(SettingsChangeTask.RINGTONE_VOLUME, ringtoneSeekBar.getProgress());
-        settingsChangeTask.putSettings(SettingsChangeTask.SYSTEM_VOLUME, systemSeekBar.getProgress());
-        settingsChangeTask.putSettings(SettingsChangeTask.WIFI_STATE, wifiSwitch.isChecked() ? 1 : 0);
-        settingsChangeTask.putSettings(SettingsChangeTask.BLUETOOTH_STATE, bluetoothSwitch.isChecked() ? 1 : 0);
+        settingsChangeTask.setAlarmVolume(alarmSeekBar.getProgress());
+        settingsChangeTask.setMusicVolume(musicSeekBar.getProgress());
+        settingsChangeTask.setNotificationVolume(notificationSeekBar.getProgress());
+        settingsChangeTask.setRingtoneVolume(ringtoneSeekBar.getProgress());
+        settingsChangeTask.setSystemVolume(systemSeekBar.getProgress());
+        settingsChangeTask.setWifiState(wifiSwitch.isChecked());
+        settingsChangeTask.setBluetoothState(bluetoothSwitch.isChecked());
 
         Intent intent = new Intent(this, ChooseDateTimeActivity.class);
         intent.putExtra("Task", settingsChangeTask);

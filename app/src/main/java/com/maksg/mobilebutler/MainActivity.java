@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onScheduleEventButtonClick(View view) {
-        SettingsChangeTask settingsChangeTask = new SettingsChangeTask(this);
+        SettingsChangeTask settingsChangeTask = new SettingsChangeTask();
         Intent intent = new Intent(this, ChooseActionActivity.class);
         intent.putExtra("Task", settingsChangeTask);
         startActivity(intent);
