@@ -42,6 +42,21 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         systemVolume = in.readInt();
         wifiState = in.readByte() != 0;
         bluetoothState = in.readByte() != 0;
+        startMoment.set(Calendar.YEAR, in.readInt());
+        startMoment.set(Calendar.MONTH, in.readInt());
+        startMoment.set(Calendar.DAY_OF_MONTH, in.readInt());
+        startMoment.set(Calendar.HOUR_OF_DAY, in.readInt());
+        startMoment.set(Calendar.MINUTE, in.readInt());
+        startMoment.set(Calendar.SECOND, in.readInt());
+        startMoment.set(Calendar.MILLISECOND, in.readInt());
+    }
+
+    public Calendar getStartMoment() {
+        return startMoment;
+    }
+
+    public void setStartMoment(Calendar startMoment) {
+        this.startMoment = startMoment;
     }
 
     public void setAlarmVolume(int alarmVolume) {
@@ -72,10 +87,6 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         this.bluetoothState = bluetoothState;
     }
 
-    public void setStartMoment(Calendar startMoment) {
-        this.startMoment = startMoment;
-    }
-
     public void setContext(Context context) {
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -95,6 +106,13 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         dest.writeInt(systemVolume);
         dest.writeByte((byte) (wifiState ? 1 : 0));
         dest.writeByte((byte) (bluetoothState ? 1 : 0));
+        dest.writeInt(startMoment.get(Calendar.YEAR));
+        dest.writeInt(startMoment.get(Calendar.MONTH));
+        dest.writeInt(startMoment.get(Calendar.DAY_OF_MONTH));
+        dest.writeInt(startMoment.get(Calendar.HOUR_OF_DAY));
+        dest.writeInt(startMoment.get(Calendar.MINUTE));
+        dest.writeInt(startMoment.get(Calendar.SECOND));
+        dest.writeInt(startMoment.get(Calendar.MILLISECOND));
     }
 
     @Override
