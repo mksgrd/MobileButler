@@ -23,28 +23,39 @@
                 android:text="Измененные ранее настройки будут применены в указанные ниже дату и время"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView4"
+                android:id="@+id/selectedDateTime"
                 android:textAlignment="center"/>
+
+        <TextView
+                android:text="Выбранная дата и время: NaN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                android:textAlignment="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"/>
 
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
 
-            <DatePicker
+            <Button
+                    android:text="Указать дату"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/datePicker"
+                    android:id="@+id/button"
                     android:layout_weight="1"
-                    android:datePickerMode="spinner"
-                    android:calendarViewShown="false"/>
+                    android:onClick="onPointDateButtonClick"/>
 
-            <TimePicker
+            <Button
+                    android:text="Указать время"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/timePicker"
+                    android:id="@+id/button2"
                     android:layout_weight="1"
-                    android:timePickerMode="spinner"/>
+                    android:onClick="onPointTimeButtonClick"/>
         </LinearLayout>
 
         <Button
