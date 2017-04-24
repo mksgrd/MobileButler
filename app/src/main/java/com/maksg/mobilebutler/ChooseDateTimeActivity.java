@@ -11,9 +11,10 @@ import scheduler.SettingsChangeTask;
 import java.util.Calendar;
 
 public class ChooseDateTimeActivity extends AppCompatActivity {
+    private SettingsChangeTask settingsChangeTask;
+
     private DatePicker datePicker;
     private TimePicker timePicker;
-    private SettingsChangeTask settingsChangeTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

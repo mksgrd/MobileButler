@@ -15,6 +15,8 @@ import android.widget.TextView;
 import scheduler.SettingsChangeTask;
 
 public class ChooseActionActivity extends AppCompatActivity {
+    private SettingsChangeTask settingsChangeTask;
+
     private TextView alarmTextView, musicTextView, notificationTextView, ringtoneTextView, systemTextView;
     private SeekBar alarmSeekBar, musicSeekBar, notificationSeekBar, ringtoneSeekBar, systemSeekBar;
     private Switch disableAllSoundsSwitch, wifiSwitch, bluetoothSwitch;
@@ -54,6 +56,8 @@ public class ChooseActionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_action);
+
+        settingsChangeTask = (SettingsChangeTask) getIntent().getSerializableExtra("Task");
 
         AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
@@ -110,7 +114,6 @@ public class ChooseActionActivity extends AppCompatActivity {
     }
 
     public void onApplySettingsButtonClicked(View view) {
-        SettingsChangeTask settingsChangeTask = new SettingsChangeTask(this);
         if (disableAllSoundsSwitch.isChecked()) {
             alarmSeekBar.setProgress(0);
             musicSeekBar.setProgress(0);

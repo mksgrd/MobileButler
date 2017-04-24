@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import scheduler.SettingsChangeTask;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -13,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onScheduleEventButtonClick(View view) {
+        SettingsChangeTask settingsChangeTask = new SettingsChangeTask(this);
         Intent intent = new Intent(this, ChooseActionActivity.class);
+        intent.putExtra("Task", settingsChangeTask);
         startActivity(intent);
     }
 
