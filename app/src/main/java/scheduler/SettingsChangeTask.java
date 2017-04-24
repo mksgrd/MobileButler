@@ -6,11 +6,12 @@ import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.util.SparseIntArray;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SettingsChangeTask extends TimerTask {
+public class SettingsChangeTask extends TimerTask implements Serializable {
     public static final int ALARM_VOLUME = 0;
     public static final int MUSIC_VOLUME = 1;
     public static final int NOTIFICATION_VOLUME = 2;

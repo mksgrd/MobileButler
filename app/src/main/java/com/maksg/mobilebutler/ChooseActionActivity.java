@@ -2,7 +2,7 @@ package com.maksg.mobilebutler;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import scheduler.SettingsChangeTask;
 
 public class ChooseActionActivity extends AppCompatActivity {
     private TextView alarmTextView, musicTextView, notificationTextView, ringtoneTextView, systemTextView;
@@ -23,19 +24,19 @@ public class ChooseActionActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             switch (seekBar.getId()) {
                 case R.id.alarmSeekBar:
-                    alarmTextView.setText("Громкость предупреждений: " + Integer.toString(progress));
+                    alarmTextView.setText(String.format("Громкость предупреждений: %s", Integer.toString(progress)));
                     break;
                 case R.id.musicSeekBar:
-                    musicTextView.setText("Громкость музыки: " + Integer.toString(progress));
+                    musicTextView.setText(String.format("Громкость музыки: %s", Integer.toString(progress)));
                     break;
                 case R.id.notificationSeekBar:
-                    notificationTextView.setText("Громкость оповещений: " + Integer.toString(progress));
+                    notificationTextView.setText(String.format("Громкость оповещений: %s", Integer.toString(progress)));
                     break;
                 case R.id.ringtoneSeekBar:
-                    ringtoneTextView.setText("Громкость мелодии звонка: " + Integer.toString(progress));
+                    ringtoneTextView.setText(String.format("Громкость мелодии звонка: %s", Integer.toString(progress)));
                     break;
                 case R.id.systemSeekBar:
-                    systemTextView.setText("Громкость системных звуков: " + Integer.toString(progress));
+                    systemTextView.setText(String.format("Громкость системных звуков: %s", Integer.toString(progress)));
                     break;
             }
         }
@@ -109,28 +110,25 @@ public class ChooseActionActivity extends AppCompatActivity {
     }
 
     public void onApplySettingsButtonClicked(View view) {
-        SharedPreferences sharedPreferences = getSharedPreferences("MobileButlerSP", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-
+        SettingsChangeTask settingsChangeTask = new SettingsChangeTask(this);
         if (disableAllSoundsSwitch.isChecked()) {
-            editor.putInt("alarm_volume", 0);
-            editor.putInt("music_volume", 0);
-            editor.putInt("notification_volume", 0);
-            editor.putInt("ringtone_volume", 0);
-            editor.putInt("system_volume", 0);
-        } else {
-            editor.putInt("alarm_volume", alarmSeekBar.getProgress());
-            editor.putInt("music_volume", musicSeekBar.getProgress());
-            editor.putInt("notification_volume", notificationSeekBar.getProgress());
-            editor.putInt("ringtone_volume", ringtoneSeekBar.getProgress());
-            editor.putInt("system_volume", systemSeekBar.getProgress());
+            alarmSeekBar.setProgress(0);
+            musicSeekBar.setProgress(0);
+            notificationSeekBar.setProgress(0);
+            ringtoneSeekBar.setProgress(0);
+            systemSeekBar.setProgress(0);
         }
 
-        editor.putBoolean("wifi_state", wifiSwitch.isChecked());
-        editor.putBoolean("bluetooth_state", bluetoothSwitch.isChecked());
+        settingsChangeTask.putSettings(SettingsChangeTask.ALARM_VOLUME, alarmSeekBar.getProgress());
+        settingsChangeTask.putSettings(SettingsChangeTask.MUSIC_VOLUME, musicSeekBar.getProgress());
+        settingsChangeTask.putSettings(SettingsChangeTask.NOTIFICATION_VOLUME, notificationSeekBar.getProgress());
+        settingsChangeTask.putSettings(SettingsChangeTask.RINGTONE_VOLUME, ringtoneSeekBar.getProgress());
+        settingsChangeTask.putSettings(SettingsChangeTask.SYSTEM_VOLUME, systemSeekBar.getProgress());
+        settingsChangeTask.putSettings(SettingsChangeTask.WIFI_STATE, wifiSwitch.isChecked() ? 1 : 0);
+        settingsChangeTask.putSettings(SettingsChangeTask.BLUETOOTH_STATE, bluetoothSwitch.isChecked() ? 1 : 0);
 
-        editor.apply();
-        finish();
+        Intent intent = new Intent(this, ChooseDateTimeActivity.class);
+        intent.putExtra("Task", settingsChangeTask);
+        startActivity(intent);
     }
 }

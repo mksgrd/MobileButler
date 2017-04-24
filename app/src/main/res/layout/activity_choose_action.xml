@@ -21,13 +21,10 @@
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_height="wrap_content">
 
             <TextView
-                    android:text="Измененные вами настройки будут установлены при наступлении определенного срока"
+                    android:text="Вы можете запланировать применение необходимого состояния для данных настроек"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView3"
@@ -38,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/alarmTextView"
-                    android:textAlignment="center"/>
+                    />
 
             <SeekBar
                     android:layout_width="match_parent"
@@ -50,8 +47,7 @@
                     android:text="Громкость музыки"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/musicTextView"
-                    android:textAlignment="center"/>
+                    android:id="@+id/musicTextView"/>
 
             <SeekBar
                     android:layout_width="match_parent"
@@ -63,8 +59,7 @@
                     android:text="Громкость оповещений"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/notificationTextView"
-                    android:textAlignment="center"/>
+                    android:id="@+id/notificationTextView"/>
 
             <SeekBar
                     android:layout_width="match_parent"
@@ -76,8 +71,7 @@
                     android:text="Громкость мелодии звонка"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ringtoneTextView"
-                    android:textAlignment="center"/>
+                    android:id="@+id/ringtoneTextView"/>
 
             <SeekBar
                     android:layout_width="match_parent"
@@ -90,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/systemTextView"
-                    android:textAlignment="center"/>
+                    />
 
             <SeekBar
                     android:layout_width="match_parent"
@@ -104,7 +98,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/disableAllSoundsSwitch"
                     android:layout_marginBottom="15dp"
-                    android:checked="false"/>
+                    android:checked="false"
+                    android:textOn="Да"
+                    android:textOff="Нет"/>
 
             <Switch
                     android:text="Wi-Fi"
@@ -121,7 +117,7 @@
                     android:layout_marginBottom="15dp"/>
 
             <Button
-                    android:text="Применить"
+                    android:text="Далее"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/applySettingsButton"
