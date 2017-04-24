@@ -1,22 +1,52 @@
 package com.maksg.mobilebutler;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.AudioManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
-import android.view.View;
-import android.widget.*;
-import scheduler.Event;
-import scheduler.EventScheduler;
+import android.widget.TextView;
+import scheduler.SettingsChangeTask;
 
-import java.util.Calendar;
+public class ScheduleEventActivity extends AppCompatActivity {
+    private SettingsChangeTask settingsChangeTask;
+    private TextView dateTimeTextView, settingsTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_schedule_event);
+
+        settingsChangeTask = getIntent().getParcelableExtra("Task");
+
+        dateTimeTextView = (TextView) findViewById(R.id.dateTimeTextView);
+        dateTimeTextView.setText(String.format("Выбранное дата и время:\n%s", DateUtils.formatDateTime(this,
+                settingsChangeTask.getStartMoment().getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_WEEKDAY |
+                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR)));
+
+        settingsTextView = (TextView) findViewById(R.id.settingsTextView);
+    }
+}
+/*
+
+package com.maksg.mobilebutler;
+
+        import android.app.DatePickerDialog;
+        import android.app.TimePickerDialog;
+        import android.bluetooth.BluetoothAdapter;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.content.SharedPreferences;
+        import android.media.AudioManager;
+        import android.net.wifi.WifiManager;
+        import android.os.Bundle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.text.format.DateUtils;
+        import android.view.View;
+        import android.widget.*;
+        import scheduler.Event;
+        import scheduler.EventScheduler;
+
+        import java.util.Calendar;
 
 public class ScheduleEventActivity extends AppCompatActivity {
     private Calendar dateTime = Calendar.getInstance();
@@ -132,4 +162,4 @@ public class ScheduleEventActivity extends AppCompatActivity {
         event.setStartMoment(dateTime);
         eventScheduler.scheduleEvent(event);
     }
-}
+}*/

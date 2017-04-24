@@ -14,107 +14,37 @@
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_height="match_parent">
 
         <TextView
-                android:text="Событие успешно сформировано. Вы можете корректировать любые его параметры"
+                android:text="Событие успешно сформировано!\nПри необходимости Вы можете запустить процесс создания события заново."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
-                android:textAlignment="center"
-                android:layout_marginBottom="15dp"/>
+                />
 
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <TextView
-                    android:text="Выбранное время"
-                    android:textAlignment="textStart"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:id="@+id/selectedTimeTextView"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
-
-            <Button
-                    android:text="Изменить время"
-                    android:layout_gravity="fill"
-                    android:layout_width="match_parent"
-                    android:id="@+id/pointTimeButton"
-                    android:onClick="onPointTimeButtonClick"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <TextView
-                    android:text="Выбранная дата"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:textAlignment="textStart"
-                    android:id="@+id/selectedDateTextView"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
-
-            <Button
-                    android:text="Изменить дату"
-                    android:layout_gravity="fill"
-                    android:layout_width="match_parent"
-                    android:id="@+id/pointDateButton"
-                    android:onClick="onPointDateButtonClick"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <Button
-                android:text="Изменить настройки"
-                android:layout_gravity="fill"
-                android:layout_width="match_parent"
-                android:id="@+id/pointActionButton"
-                android:onClick="onPointActionButtonClick"
-                android:layout_weight="1"
-                android:layout_marginBottom="15dp"
-                android:layout_height="0dp"/>
-
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="15dp">
-
-            <CheckBox
-                    android:text="Повторение"
-                    android:layout_height="match_parent"
-                    android:id="@+id/checkBox"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:checked="false"/>
-
-            <Spinner
-                    android:layout_height="match_parent"
-                    android:id="@+id/spinner"
-                    android:entries="@array/activity_schedule_event_spinner_names"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"/>
-        </LinearLayout>
-
-        <Button
-                android:text="Создать событие"
+        <TextView
+                android:text="Выбранное дата и время: NaN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/createEventButton"
-                android:onClick="onCreateEventButtonClick"/>
-    </LinearLayout>
+                android:id="@+id/dateTimeTextView"/>
 
+        <TextView
+                android:text="Выбранные настройки: NaN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/settingsTextView"/>
+
+        <Button
+                android:text="Пересоздать событие"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recreateButton"/>
+
+        <Button
+                android:text="Запланировать событие"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/scheduleEventButton"/>
+    </LinearLayout>
 </RelativeLayout>
