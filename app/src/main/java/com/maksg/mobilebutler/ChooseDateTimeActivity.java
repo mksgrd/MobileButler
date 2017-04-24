@@ -23,6 +23,7 @@ public class ChooseDateTimeActivity extends AppCompatActivity {
 
         datePicker = (DatePicker) findViewById(R.id.datePicker);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
+        timePicker.setIs24HourView(true);
 
         settingsChangeTask = getIntent().getParcelableExtra("Task");
     }
