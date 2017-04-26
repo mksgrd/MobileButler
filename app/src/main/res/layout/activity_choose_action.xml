@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/alarmTextView"
-                    />
+                    android:textStyle="normal|bold"/>
 
             <SeekBar
                     android:layout_width="match_parent"
@@ -47,7 +47,8 @@
                     android:text="Громкость музыки"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/musicTextView"/>
+                    android:id="@+id/musicTextView"
+                    android:textStyle="normal|bold"/>
 
             <SeekBar
                     android:layout_width="match_parent"
@@ -59,7 +60,8 @@
                     android:text="Громкость оповещений"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/notificationTextView"/>
+                    android:id="@+id/notificationTextView"
+                    android:textStyle="normal|bold"/>
 
             <SeekBar
                     android:layout_width="match_parent"
@@ -71,7 +73,8 @@
                     android:text="Громкость мелодии звонка"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ringtoneTextView"/>
+                    android:id="@+id/ringtoneTextView"
+                    android:textStyle="normal|bold"/>
 
             <SeekBar
                     android:layout_width="match_parent"
@@ -84,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/systemTextView"
-                    />
+                    android:textStyle="normal|bold"/>
 
             <SeekBar
                     android:layout_width="match_parent"

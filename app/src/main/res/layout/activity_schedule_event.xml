@@ -24,7 +24,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView"
-                android:textAlignment="textStart"
                 android:layout_marginBottom="20dp"/>
 
         <TextView
@@ -32,14 +31,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/dateTimeTextView"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:textStyle="normal|bold"/>
 
         <TextView
                 android:text="Выбранные настройки: NaN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/settingsTextView"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:textStyle="normal|bold"/>
 
         <Button
                 android:text="Пересоздать событие"

@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.widget.TextView;
 import scheduler.SettingsChangeTask;
-import utils.TextUtils;
 
 public class ScheduleEventActivity extends AppCompatActivity {
     private SettingsChangeTask settingsChangeTask;
@@ -36,8 +35,6 @@ public class ScheduleEventActivity extends AppCompatActivity {
                 "Состояние Bluetooth: " + bluetoothState;
 
         settingsTextView = (TextView) findViewById(R.id.settingsTextView);
-        settingsTextView.setText(TextUtils.makeSectionOfTextBold(text, "Громкость предупреждений:",
-                "Громкость музыки:", "Громкость оповещений:", "Громкость оповещений:", "Громкость мелодии звонка:",
-                "Громкость системных звуков:", "Состояние Wi-Fi:", "Состояние Bluetooth:"));
+        settingsTextView.setText(text);
     }
 }
