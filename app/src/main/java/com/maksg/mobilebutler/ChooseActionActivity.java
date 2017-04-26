@@ -126,8 +126,8 @@ public class ChooseActionActivity extends AppCompatActivity {
         settingsChangeTask.setNotificationVolume(notificationSeekBar.getProgress());
         settingsChangeTask.setRingtoneVolume(ringtoneSeekBar.getProgress());
         settingsChangeTask.setSystemVolume(systemSeekBar.getProgress());
-        settingsChangeTask.setWifiState(wifiSwitch.isChecked());
-        settingsChangeTask.setBluetoothState(bluetoothSwitch.isChecked());
+        settingsChangeTask.setWifiEnabled(wifiSwitch.isChecked());
+        settingsChangeTask.setBluetoothEnabled(bluetoothSwitch.isChecked());
 
         Intent intent = new Intent(this, ChooseDateTimeActivity.class);
         intent.putExtra("Task", settingsChangeTask);
