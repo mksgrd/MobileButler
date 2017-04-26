@@ -24,7 +24,7 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         }
     };
     private int alarmVolume, musicVolume, notificationVolume, ringtoneVolume, systemVolume;
-    private boolean wifiState, bluetoothState;
+    private boolean wifiEnabled, bluetoothEnabled;
     private Calendar startMoment = Calendar.getInstance();
     private Timer timer = new Timer();
     private AudioManager audioManager;
@@ -40,8 +40,8 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         notificationVolume = in.readInt();
         ringtoneVolume = in.readInt();
         systemVolume = in.readInt();
-        wifiState = in.readByte() != 0;
-        bluetoothState = in.readByte() != 0;
+        wifiEnabled = in.readByte() != 0;
+        bluetoothEnabled = in.readByte() != 0;
         startMoment.set(Calendar.YEAR, in.readInt());
         startMoment.set(Calendar.MONTH, in.readInt());
         startMoment.set(Calendar.DAY_OF_MONTH, in.readInt());
@@ -51,40 +51,68 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         startMoment.set(Calendar.MILLISECOND, in.readInt());
     }
 
-    public Calendar getStartMoment() {
-        return startMoment;
-    }
-
-    public void setStartMoment(Calendar startMoment) {
-        this.startMoment = startMoment;
+    public int getAlarmVolume() {
+        return alarmVolume;
     }
 
     public void setAlarmVolume(int alarmVolume) {
         this.alarmVolume = alarmVolume;
     }
 
+    public int getMusicVolume() {
+        return musicVolume;
+    }
+
     public void setMusicVolume(int musicVolume) {
         this.musicVolume = musicVolume;
+    }
+
+    public int getNotificationVolume() {
+        return notificationVolume;
     }
 
     public void setNotificationVolume(int notificationVolume) {
         this.notificationVolume = notificationVolume;
     }
 
+    public int getRingtoneVolume() {
+        return ringtoneVolume;
+    }
+
     public void setRingtoneVolume(int ringtoneVolume) {
         this.ringtoneVolume = ringtoneVolume;
+    }
+
+    public int getSystemVolume() {
+        return systemVolume;
     }
 
     public void setSystemVolume(int systemVolume) {
         this.systemVolume = systemVolume;
     }
 
-    public void setWifiState(boolean wifiState) {
-        this.wifiState = wifiState;
+    public boolean isWifiEnabled() {
+        return wifiEnabled;
     }
 
-    public void setBluetoothState(boolean bluetoothState) {
-        this.bluetoothState = bluetoothState;
+    public void setWifiEnabled(boolean wifiEnabled) {
+        this.wifiEnabled = wifiEnabled;
+    }
+
+    public boolean isBluetoothEnabled() {
+        return bluetoothEnabled;
+    }
+
+    public void setBluetoothEnabled(boolean bluetoothEnabled) {
+        this.bluetoothEnabled = bluetoothEnabled;
+    }
+
+    public Calendar getStartMoment() {
+        return startMoment;
+    }
+
+    public void setStartMoment(Calendar startMoment) {
+        this.startMoment = startMoment;
     }
 
     public void setContext(Context context) {
@@ -104,8 +132,8 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         dest.writeInt(notificationVolume);
         dest.writeInt(ringtoneVolume);
         dest.writeInt(systemVolume);
-        dest.writeByte((byte) (wifiState ? 1 : 0));
-        dest.writeByte((byte) (bluetoothState ? 1 : 0));
+        dest.writeByte((byte) (wifiEnabled ? 1 : 0));
+        dest.writeByte((byte) (bluetoothEnabled ? 1 : 0));
         dest.writeInt(startMoment.get(Calendar.YEAR));
         dest.writeInt(startMoment.get(Calendar.MONTH));
         dest.writeInt(startMoment.get(Calendar.DAY_OF_MONTH));
@@ -123,9 +151,9 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         audioManager.setStreamVolume(AudioManager.STREAM_RING, ringtoneVolume, 0);
         audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, systemVolume, 0);
 
-        wifiManager.setWifiEnabled(wifiState);
+        wifiManager.setWifiEnabled(wifiEnabled);
 
-        if (bluetoothState)
+        if (bluetoothEnabled)
             bluetoothAdapter.enable();
         else
             bluetoothAdapter.disable();
