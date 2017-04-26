@@ -23,13 +23,13 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
             return new SettingsChangeTask[size];
         }
     };
+    private final Timer timer = new Timer();
+    private final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private int alarmVolume, musicVolume, notificationVolume, ringtoneVolume, systemVolume;
     private boolean wifiEnabled, bluetoothEnabled;
     private Calendar startMoment = Calendar.getInstance();
-    private Timer timer = new Timer();
     private AudioManager audioManager;
     private WifiManager wifiManager;
-    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
     public SettingsChangeTask() {
     }

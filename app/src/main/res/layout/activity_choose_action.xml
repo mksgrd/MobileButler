@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/activity_change_sound_settings"
@@ -9,124 +9,118 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context="com.maksg.mobilebutler.ChooseActionActivity">
+        tools:context="com.maksg.mobilebutler.ChooseActionActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-    <ScrollView
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-                android:orientation="vertical"
+        <TextView
+                android:text="Вы можете запланировать применение необходимого состояния для данных настроек"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3"
+                android:layout_marginBottom="15dp"/>
 
-            <TextView
-                    android:text="Вы можете запланировать применение необходимого состояния для данных настроек"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView3"
-                    android:layout_marginBottom="15dp"/>
+        <TextView
+                android:text="Громкость предупреждений"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/alarmTextView"
+                android:textStyle="normal|bold"/>
 
-            <TextView
-                    android:text="Громкость предупреждений"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/alarmTextView"
-                    android:textStyle="normal|bold"/>
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/alarmSeekBar"
+                android:layout_marginBottom="10dp"/>
 
-            <SeekBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/alarmSeekBar"
-                    android:layout_marginBottom="10dp"/>
+        <TextView
+                android:text="Громкость музыки"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/musicTextView"
+                android:textStyle="normal|bold"/>
 
-            <TextView
-                    android:text="Громкость музыки"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/musicTextView"
-                    android:textStyle="normal|bold"/>
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/musicSeekBar"
+                android:layout_marginBottom="10dp"/>
 
-            <SeekBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/musicSeekBar"
-                    android:layout_marginBottom="10dp"/>
+        <TextView
+                android:text="Громкость оповещений"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/notificationTextView"
+                android:textStyle="normal|bold"/>
 
-            <TextView
-                    android:text="Громкость оповещений"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/notificationTextView"
-                    android:textStyle="normal|bold"/>
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/notificationSeekBar"
+                android:layout_marginBottom="10dp"/>
 
-            <SeekBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/notificationSeekBar"
-                    android:layout_marginBottom="10dp"/>
+        <TextView
+                android:text="Громкость мелодии звонка"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ringtoneTextView"
+                android:textStyle="normal|bold"/>
 
-            <TextView
-                    android:text="Громкость мелодии звонка"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ringtoneTextView"
-                    android:textStyle="normal|bold"/>
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ringtoneSeekBar"
+                android:layout_marginBottom="10dp"/>
 
-            <SeekBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ringtoneSeekBar"
-                    android:layout_marginBottom="10dp"/>
+        <TextView
+                android:text="Громкость системных звуков"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/systemTextView"
+                android:textStyle="normal|bold"/>
 
-            <TextView
-                    android:text="Громкость системных звуков"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/systemTextView"
-                    android:textStyle="normal|bold"/>
+        <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/systemSeekBar"
+                android:layout_marginBottom="10dp"/>
 
-            <SeekBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/systemSeekBar"
-                    android:layout_marginBottom="10dp"/>
+        <Switch
+                android:text="Отключить все звуки"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/disableAllSoundsSwitch"
+                android:layout_marginBottom="15dp"
+                android:checked="false"
+                android:textOn="Да"
+                android:textOff="Нет"/>
 
-            <Switch
-                    android:text="Отключить все звуки"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/disableAllSoundsSwitch"
-                    android:layout_marginBottom="15dp"
-                    android:checked="false"
-                    android:textOn="Да"
-                    android:textOff="Нет"/>
+        <Switch
+                android:text="Wi-Fi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/wifiSwitch"
+                android:layout_marginBottom="15dp"/>
 
-            <Switch
-                    android:text="Wi-Fi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/wifiSwitch"
-                    android:layout_marginBottom="15dp"/>
+        <Switch
+                android:text="Bluetooth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bluetoothSwitch"
+                android:layout_marginBottom="15dp"/>
 
-            <Switch
-                    android:text="Bluetooth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/bluetoothSwitch"
-                    android:layout_marginBottom="15dp"/>
+        <Button
+                android:text="Далее"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/applySettingsButton"
+                android:onClick="onApplySettingsButtonClicked"/>
 
-            <Button
-                    android:text="Далее"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/applySettingsButton"
-                    android:onClick="onApplySettingsButtonClicked"/>
-
-        </LinearLayout>
-    </ScrollView>
-
-</RelativeLayout>
+    </LinearLayout>
+</ScrollView>
