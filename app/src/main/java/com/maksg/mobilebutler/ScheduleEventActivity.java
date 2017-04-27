@@ -3,6 +3,7 @@ package com.maksg.mobilebutler;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
+import android.view.View;
 import android.widget.TextView;
 import scheduler.SettingsChangeTask;
 
@@ -36,5 +37,11 @@ public class ScheduleEventActivity extends AppCompatActivity {
 
         settingsTextView = (TextView) findViewById(R.id.settingsTextView);
         settingsTextView.setText(text);
+    }
+
+    public void onRecreateEventButtonClick(View view) {
+    }
+
+    public void onScheduleEventButtonClick(View view) {
     }
 }

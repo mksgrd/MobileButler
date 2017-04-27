@@ -46,12 +46,14 @@
                 android:text="Пересоздать событие"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recreateButton"/>
+                android:id="@+id/recreateButton"
+                android:onClick="onRecreateEventButtonClick"/>
 
         <Button
                 android:text="Запланировать событие"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/scheduleEventButton"/>
+                android:id="@+id/scheduleEventButton"
+                android:onClick="onScheduleEventButtonClick"/>
     </LinearLayout>
 </RelativeLayout>
