@@ -13,15 +13,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onScheduleEventButtonClick(View view) {
+    public void onScheduleTaskButtonClick(View view) {
         SettingsChangeTask settingsChangeTask = new SettingsChangeTask();
         Intent intent = new Intent(this, ChooseActionActivity.class);
         intent.putExtra("Task", settingsChangeTask);
         startActivity(intent);
     }
 
-    public void onScheduleTaskButtonClick(View view) {
-        Intent intent = new Intent(this, ScheduleTaskActivity.class);
+    public void onScheduleEventButtonClick(View view) {
+        Intent intent = new Intent(this, ScheduleEventActivity.class);
         startActivity(intent);
     }
 

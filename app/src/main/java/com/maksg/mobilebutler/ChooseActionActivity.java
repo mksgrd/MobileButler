@@ -28,7 +28,7 @@ public class ChooseActionActivity extends AppCompatActivity {
                 case R.id.activity_choose_action_musicSeekBar:
                     musicTextView.setText(String.format("Громкость музыки: %s", Integer.toString(progress)));
                     break;
-                case R.id.notificationSeekBar:
+                case R.id.activity_choose_action_notificationSeekBar:
                     notificationTextView.setText(String.format("Громкость оповещений: %s", Integer.toString(progress)));
                     break;
                 case R.id.activity_choose_action_ringtoneSeekBar:

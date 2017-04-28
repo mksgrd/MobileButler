@@ -23,9 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ScheduleEventActivity">
-        </activity>
         <activity android:name=".ScheduleTaskActivity">
+        </activity>
+        <activity android:name=".ScheduleEventActivity">
         </activity>
         <activity android:name=".CurrentProfileActivity">
         </activity>

@@ -36,21 +36,21 @@
                 android:layout_height="wrap_content">
 
             <Button
-                    android:text="Запланировать событие"
+                    android:text="Запланировать задачу"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:id="@+id/scheduleEventButton"
-                    android:onClick="onScheduleEventButtonClick"/>
+                    android:id="@+id/scheduleTaskButton"
+                    android:onClick="onScheduleTaskButtonClick"/>
 
             <Button
-                    android:text="Запланировать задачу"
+                    android:text="Запланировать событие"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/scheduleTaskButton"
+                    android:id="@+id/scheduleEventButton"
                     android:layout_weight="1"
-                    android:onClick="onScheduleTaskButtonClick"/>
+                    android:onClick="onScheduleEventButtonClick"/>
         </LinearLayout>
 
         <LinearLayout

@@ -69,7 +69,7 @@ public class ChooseDateTimeActivity extends AppCompatActivity {
         dateTime.set(Calendar.MILLISECOND, 0);
         settingsChangeTask.setStartMoment(dateTime);
 
-        Intent intent = new Intent(this, ScheduleEventActivity.class);
+        Intent intent = new Intent(this, ScheduleTaskActivity.class);
         intent.putExtra("Task", settingsChangeTask);
         startActivity(intent);
     }
