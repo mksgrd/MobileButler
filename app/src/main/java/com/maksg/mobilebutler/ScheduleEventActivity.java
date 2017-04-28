@@ -1,5 +1,6 @@
 package com.maksg.mobilebutler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
@@ -9,7 +10,6 @@ import scheduler.SettingsChangeTask;
 
 public class ScheduleEventActivity extends AppCompatActivity {
     private SettingsChangeTask settingsChangeTask;
-    private TextView dateTimeTextView, settingsTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +17,9 @@ public class ScheduleEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_schedule_event);
 
         settingsChangeTask = getIntent().getParcelableExtra("Task");
+        settingsChangeTask.setContext(this);
 
-        dateTimeTextView = (TextView) findViewById(R.id.dateTimeTextView);
+        TextView dateTimeTextView = (TextView) findViewById(R.id.dateTimeTextView);
         dateTimeTextView.setText(String.format("Выбранное дата и время:\n%s", DateUtils.formatDateTime(this,
                 settingsChangeTask.getStartMoment().getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_WEEKDAY |
@@ -35,13 +36,17 @@ public class ScheduleEventActivity extends AppCompatActivity {
                 "Состояние Wi-Fi: " + wifiState + "\n" +
                 "Состояние Bluetooth: " + bluetoothState;
 
-        settingsTextView = (TextView) findViewById(R.id.settingsTextView);
+        TextView settingsTextView = (TextView) findViewById(R.id.settingsTextView);
         settingsTextView.setText(text);
     }
 
     public void onRecreateEventButtonClick(View view) {
+        Intent intent = new Intent(this, ChooseActionActivity.class);
+        intent.putExtra("Task", settingsChangeTask);
+        startActivity(intent);
     }
 
     public void onScheduleEventButtonClick(View view) {
+        settingsChangeTask.schedule();
     }
 }
