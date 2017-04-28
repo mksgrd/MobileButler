@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">MobileButler</string>
+    <string name="activity_choose_action_info_text_view">Вы можете запланировать применение необходимого состояния для данных настроек</string>
+    <string name="activity_choose_action_alarm_text_view">Громкость предупреждений</string>
+    <string name="activity_choose_action_music_text_view">Громкость музыки</string>
+    <string name="activity_choose_action_notification_text_view">Громкость оповещений</string>
+    <string name="activity_choose_action_ringtone_text_view">Громкость мелодии звонка</string>
+    <string name="activity_choose_action_system_text_view">Громкость системных звуков</string>
+    <string name="activity_choose_action_disable_all_sounds_switch">Отключить все звуки</string>
+    <string name="activity_choose_action_disable_all_sounds_switch_yes">Да</string>
+    <string name="activity_choose_action_disable_all_sounds_switch_no">Нет</string>
+    <string name="activity_choose_action_wifi_switch">Wi-Fi</string>
+    <string name="activity_choose_action_bluetooth_switch">Bluetooth</string>
+    <string name="activity_choose_action_apply_settings_button">Далее</string>
 </resources>

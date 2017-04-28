@@ -20,106 +20,106 @@
             android:layout_height="wrap_content">
 
         <TextView
-                android:text="Вы можете запланировать применение необходимого состояния для данных настроек"
+                android:text="@string/activity_choose_action_info_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView3"
+                android:id="@+id/activity_choose_action_infoTextView"
                 android:layout_marginBottom="15dp"/>
 
         <TextView
-                android:text="Громкость предупреждений"
+                android:text="@string/activity_choose_action_alarm_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/alarmTextView"
+                android:id="@+id/activity_choose_action_alarmTextView"
                 android:textStyle="normal|bold"/>
 
         <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/alarmSeekBar"
+                android:id="@+id/activity_choose_action_alarmSeekBar"
                 android:layout_marginBottom="10dp"/>
 
         <TextView
-                android:text="Громкость музыки"
+                android:text="@string/activity_choose_action_music_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/musicTextView"
+                android:id="@+id/activity_choose_action_musicTextView"
                 android:textStyle="normal|bold"/>
 
         <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/musicSeekBar"
+                android:id="@+id/activity_choose_action_musicSeekBar"
                 android:layout_marginBottom="10dp"/>
 
         <TextView
-                android:text="Громкость оповещений"
+                android:text="@string/activity_choose_action_notification_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/notificationTextView"
+                android:id="@+id/activity_choose_action_notificationTextView"
                 android:textStyle="normal|bold"/>
 
         <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/notificationSeekBar"
+                android:id="@+id/activity_choose_action_notificationSeekBar"
                 android:layout_marginBottom="10dp"/>
 
         <TextView
-                android:text="Громкость мелодии звонка"
+                android:text="@string/activity_choose_action_ringtone_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ringtoneTextView"
+                android:id="@+id/activity_choose_action_ringtoneTextView"
                 android:textStyle="normal|bold"/>
 
         <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ringtoneSeekBar"
+                android:id="@+id/activity_choose_action_ringtoneSeekBar"
                 android:layout_marginBottom="10dp"/>
 
         <TextView
-                android:text="Громкость системных звуков"
+                android:text="@string/activity_choose_action_system_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/systemTextView"
+                android:id="@+id/activity_choose_action_systemTextView"
                 android:textStyle="normal|bold"/>
 
         <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/systemSeekBar"
+                android:id="@+id/activity_choose_action_systemSeekBar"
                 android:layout_marginBottom="10dp"/>
 
         <Switch
-                android:text="Отключить все звуки"
+                android:text="@string/activity_choose_action_disable_all_sounds_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/disableAllSoundsSwitch"
+                android:id="@+id/activity_choose_action_disableAllSoundsSwitch"
                 android:layout_marginBottom="15dp"
                 android:checked="false"
-                android:textOn="Да"
-                android:textOff="Нет"/>
+                android:textOn="@string/activity_choose_action_disable_all_sounds_switch_yes"
+                android:textOff="@string/activity_choose_action_disable_all_sounds_switch_no"/>
 
         <Switch
-                android:text="Wi-Fi"
+                android:text="@string/activity_choose_action_wifi_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/wifiSwitch"
+                android:id="@+id/activity_choose_action_wifiSwitch"
                 android:layout_marginBottom="15dp"/>
 
         <Switch
-                android:text="Bluetooth"
+                android:text="@string/activity_choose_action_bluetooth_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/bluetoothSwitch"
+                android:id="@+id/activity_choose_action_bluetoothSwitch"
                 android:layout_marginBottom="15dp"/>
 
         <Button
-                android:text="Далее"
+                android:text="@string/activity_choose_action_apply_settings_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/applySettingsButton"
+                android:id="@+id/activity_choose_action_applySettingsButton"
                 android:onClick="onApplySettingsButtonClicked"/>
 
     </LinearLayout>
