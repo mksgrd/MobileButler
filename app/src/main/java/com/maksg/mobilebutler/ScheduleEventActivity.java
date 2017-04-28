@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+import es.dmoral.toasty.Toasty;
 import scheduler.SettingsChangeTask;
 
 public class ScheduleEventActivity extends AppCompatActivity {
@@ -48,5 +50,8 @@ public class ScheduleEventActivity extends AppCompatActivity {
 
     public void onScheduleEventButtonClick(View view) {
         settingsChangeTask.schedule();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        Toasty.success(this, "Событие успешно запланировано", Toast.LENGTH_SHORT, true).show();
     }
 }
