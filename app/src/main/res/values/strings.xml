@@ -14,4 +14,7 @@
     <string name="activity_choose_action_apply_settings_button">Далее</string>
     <string name="help_title">Help</string>
     <string name="about_title">About</string>
+    <string name="tab_item_tasks">Задачи</string>
+    <string name="tab_item_events">События</string>
+    <string name="tab_item_profile">Профиль</string>
 </resources>
