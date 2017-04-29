@@ -12,7 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import scheduler.SettingsChangeTask;
+import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
 
 public class ChooseActionActivity extends AppCompatActivity {
     private SettingsChangeTask settingsChangeTask;

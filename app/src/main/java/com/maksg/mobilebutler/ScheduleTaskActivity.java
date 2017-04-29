@@ -7,8 +7,8 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
 import es.dmoral.toasty.Toasty;
-import scheduler.SettingsChangeTask;
 
 public class ScheduleTaskActivity extends AppCompatActivity {
     private SettingsChangeTask settingsChangeTask;

@@ -1,18 +1,25 @@
 package com.maksg.mobilebutler;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import com.maksg.mobilebutler.adapter.TabsPagerFragmentAdapter;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
+    private ViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppDefault);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initToolBar();
+        initTabs();
     }
 
     private void initToolBar() {
@@ -25,5 +32,14 @@ public class MainActivity extends Activity {
             }
         });
         toolbar.inflateMenu(R.menu.menu);
+    }
+
+    private void initTabs() {
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        TabsPagerFragmentAdapter adapter = new TabsPagerFragmentAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
     }
 }

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import scheduler.SettingsChangeTask;
+import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
 
 import java.util.Calendar;
 
