@@ -12,4 +12,5 @@
     <string name="activity_choose_action_wifi_switch">Wi-Fi</string>
     <string name="activity_choose_action_bluetooth_switch">Bluetooth</string>
     <string name="activity_choose_action_apply_settings_button">Далее</string>
+    <string name="search_title">Search</string>
 </resources>
