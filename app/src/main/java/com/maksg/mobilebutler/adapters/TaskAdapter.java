@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.maksg.mobilebutler.R;
 import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
@@ -43,7 +44,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     class TaskViewHolder extends RecyclerView.ViewHolder {
         String settings;
         Toolbar toolbar;
-        TextView selectedTime, showSettings;
+        TextView selectedTime;
+        Button showSettings;
         private View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +69,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
             selectedTime = (TextView) itemView.findViewById(R.id.selectedTime);
 
-            showSettings = (TextView) itemView.findViewById(R.id.showSettings);
+            showSettings = (Button) itemView.findViewById(R.id.showSettings);
             showSettings.setOnClickListener(onClickListener);
 
             initToolbar(itemView);
