@@ -17,4 +17,5 @@
     <string name="tab_item_tasks">Задачи</string>
     <string name="tab_item_events">События</string>
     <string name="tab_item_profile">Профиль</string>
+    <string name="selected_settings">Показать настройки</string>
 </resources>

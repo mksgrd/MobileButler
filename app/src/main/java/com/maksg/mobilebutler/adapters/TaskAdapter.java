@@ -1,22 +1,22 @@
 package com.maksg.mobilebutler.adapters;
 
-import android.support.v7.widget.CardView;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.maksg.mobilebutler.R;
-import com.maksg.mobilebutler.TaskDTO;
+import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-    private List<TaskDTO> list;
-
-    public TaskAdapter(List<TaskDTO> list) {
-        this.list = list;
-    }
+    private List<SettingsChangeTask> tasks = new ArrayList<>();
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -26,24 +26,70 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int position) {
-        holder.title.setText(list.get(position).getTitle());
-        holder.time.setText(list.get(position).getTime());
+        holder.settings = tasks.get(position).getFormattedSettings();
+        holder.toolbar.setTitle(tasks.get(position).getName());
+        holder.selectedTime.setText(tasks.get(position).getFormattedStartMoment(holder.itemView.getContext()));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return tasks.size();
     }
 
-    public static class TaskViewHolder extends RecyclerView.ViewHolder {
-        CardView cardView;
-        TextView title, time;
+    public void addTask(SettingsChangeTask settingsChangeTask) {
+        tasks.add(settingsChangeTask);
+    }
 
-        public TaskViewHolder(View itemView) {
+    class TaskViewHolder extends RecyclerView.ViewHolder {
+        String settings;
+        Toolbar toolbar;
+        TextView selectedTime, showSettings;
+        private View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setMessage(settings)
+                        .setTitle("Настройки для " + toolbar.getTitle())
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        };
+
+        TaskViewHolder(final View itemView) {
             super(itemView);
-            cardView = (CardView) itemView.findViewById(R.id.cardView);
-            title = (TextView) itemView.findViewById(R.id.titlesl);
-            time = (TextView) itemView.findViewById(R.id.timesl);
+
+            selectedTime = (TextView) itemView.findViewById(R.id.selectedTime);
+
+            showSettings = (TextView) itemView.findViewById(R.id.showSettings);
+            showSettings.setOnClickListener(onClickListener);
+
+            initToolbar(itemView);
+        }
+
+        private void initToolbar(View itemView) {
+            toolbar = (Toolbar) itemView.findViewById(R.id.cardToolbar);
+            toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    removeAt(getAdapterPosition());
+                    return true;
+                }
+            });
+
+            toolbar.inflateMenu(R.menu.card);
+        }
+
+        private void removeAt(int position) {
+            tasks.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, tasks.size());
         }
     }
 }

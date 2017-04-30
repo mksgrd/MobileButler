@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.format.DateUtils;
 
 import java.util.Calendar;
 import java.util.Timer;
@@ -25,6 +26,7 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
     };
     private final Timer timer = new Timer();
     private final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    private String name;
     private int alarmVolume, musicVolume, notificationVolume, ringtoneVolume, systemVolume;
     private boolean wifiEnabled, bluetoothEnabled;
     private Calendar startMoment = Calendar.getInstance();
@@ -49,6 +51,15 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         startMoment.set(Calendar.MINUTE, in.readInt());
         startMoment.set(Calendar.SECOND, in.readInt());
         startMoment.set(Calendar.MILLISECOND, in.readInt());
+        name = in.readString();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAlarmVolume() {
@@ -141,6 +152,7 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         dest.writeInt(startMoment.get(Calendar.MINUTE));
         dest.writeInt(startMoment.get(Calendar.SECOND));
         dest.writeInt(startMoment.get(Calendar.MILLISECOND));
+        dest.writeString(name);
     }
 
     @Override
@@ -162,5 +174,25 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
     public void schedule() {
         long waitUntilRun = startMoment.getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
         timer.schedule(this, waitUntilRun);
+    }
+
+    public String getFormattedStartMoment(Context context) {
+        return DateUtils.formatDateTime(context,
+                startMoment.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_WEEKDAY |
+                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
+    }
+
+    public String getFormattedSettings() {
+        String wifiState = wifiEnabled ? "Включить" : "Выключить";
+        String bluetoothState = bluetoothEnabled ? "Включить" : "Выключить";
+        String text = "Громкость предупреждений: " + Integer.toString(alarmVolume) + "\n" +
+                "Громкость музыки: " + Integer.toString(musicVolume) + "\n" +
+                "Громкость оповещений: " + Integer.toString(notificationVolume) + "\n" +
+                "Громкость мелодии звонка: " + Integer.toString(ringtoneVolume) + "\n" +
+                "Громкость системных звуков: " + Integer.toString(systemVolume) + "\n" +
+                "Состояние Wi-Fi: " + wifiState + "\n" +
+                "Состояние Bluetooth: " + bluetoothState;
+
+        return text;
     }
 }

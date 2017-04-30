@@ -2,6 +2,7 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,20 +24,29 @@
                 android:orientation="vertical"
                 android:padding="@dimen/activity_horizontal_margin">
 
-            <TextView
-                    android:id="@+id/titlesl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="8pt"
-                    android:textColor="@android:color/black"
-                    android:paddingBottom="5dp"/>
+            <android.support.v7.widget.Toolbar
+                    android:id="@+id/cardToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:titleTextColor="@android:color/black"
+                    card:titleMargin="0dp"
+                    card:contentInsetStart="0dp"/>
 
             <TextView
-                    android:id="@+id/timesl"
+                    android:id="@+id/selectedTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="8pt"
                     android:textColor="@android:color/black"
+                    android:paddingBottom="16dp"/>
+
+            <TextView
+                    android:text="@string/selected_settings"
+                    android:id="@+id/showSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="8pt"
+                    android:textColor="@color/colorPrimary"
                     android:paddingBottom="5dp"/>
         </LinearLayout>
 

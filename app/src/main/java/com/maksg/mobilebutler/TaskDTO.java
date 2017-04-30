@@ -1,12 +1,12 @@
 package com.maksg.mobilebutler;
 
 public class TaskDTO {
-    private String title;
-    private String time;
+    private String title, time, settings;
 
-    public TaskDTO(String title, String time) {
+    public TaskDTO(String title, String time, String settings) {
         this.title = title;
         this.time = time;
+        this.settings = settings;
     }
 
     public String getTitle() {
@@ -23,5 +23,13 @@ public class TaskDTO {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getSettings() {
+        return settings;
+    }
+
+    public void setSettings(String settings) {
+        this.settings = settings;
     }
 }
