@@ -6,7 +6,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 import com.maksg.mobilebutler.adapters.TabsFragmentAdapter;
+import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -41,5 +44,19 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    public void onFloatingActionButtonClick(View view) {
+        switch (viewPager.getCurrentItem()) {
+            case 0:
+                Toasty.info(this, "Задачи", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 1:
+                Toasty.info(this, "События", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 2:
+                Toasty.info(this, "Профиль", Toast.LENGTH_SHORT, true).show();
+                break;
+        }
     }
 }
