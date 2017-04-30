@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.maksg.mobilebutler.R;
 
-public class EventsTabFragment extends AbstractTabFragment {
+public class EventsTabFragment extends TabFragment {
     public static EventsTabFragment getInstance(Context context) {
         Bundle args = new Bundle();
         EventsTabFragment fragment = new EventsTabFragment();

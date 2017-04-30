@@ -5,19 +5,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
-import com.maksg.mobilebutler.fragments.AbstractTabFragment;
 import com.maksg.mobilebutler.fragments.EventsTabFragment;
 import com.maksg.mobilebutler.fragments.ProfileTabFragment;
+import com.maksg.mobilebutler.fragments.TabFragment;
 import com.maksg.mobilebutler.fragments.TasksTabFragment;
 
 public class TabsFragmentAdapter extends FragmentPagerAdapter {
 
-    private SparseArray<AbstractTabFragment> tabs = new SparseArray<>();
-    private Context context;
+    private SparseArray<TabFragment> tabs = new SparseArray<>();
 
     public TabsFragmentAdapter(Context context, FragmentManager fm) {
         super(fm);
-        this.context = context;
         initTabsMap(context);
     }
 

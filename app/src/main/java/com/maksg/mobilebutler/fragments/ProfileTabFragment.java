@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.maksg.mobilebutler.R;
 
-public class ProfileTabFragment extends AbstractTabFragment {
+public class ProfileTabFragment extends TabFragment {
     public static ProfileTabFragment getInstance(Context context) {
         Bundle args = new Bundle();
         ProfileTabFragment fragment = new ProfileTabFragment();
