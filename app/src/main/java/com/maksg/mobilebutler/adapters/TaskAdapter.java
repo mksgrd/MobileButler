@@ -2,6 +2,7 @@ package com.maksg.mobilebutler.adapters;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,10 +15,12 @@ import com.maksg.mobilebutler.R;
 import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     private List<SettingsChangeTask> tasks = new ArrayList<>();
+    private Handler handler = new Handler();
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -37,8 +40,23 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         return tasks.size();
     }
 
-    public void addTask(SettingsChangeTask settingsChangeTask) {
+    public void addTask(final SettingsChangeTask settingsChangeTask) {
         tasks.add(settingsChangeTask);
+        settingsChangeTask.schedule();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (tasks.contains(settingsChangeTask))
+                    removeAt(tasks.indexOf(settingsChangeTask));
+            }
+        }, settingsChangeTask.getStartMoment().getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
+    }
+
+    private void removeAt(int position) {
+        tasks.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, tasks.size());
     }
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
@@ -86,12 +104,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             });
 
             toolbar.inflateMenu(R.menu.card);
-        }
-
-        private void removeAt(int position) {
-            tasks.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, tasks.size());
         }
     }
 }

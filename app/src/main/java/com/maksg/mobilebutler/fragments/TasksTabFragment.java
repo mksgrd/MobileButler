@@ -10,9 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.maksg.mobilebutler.R;
 import com.maksg.mobilebutler.adapters.TaskAdapter;
-import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
-
-import java.util.Calendar;
 
 public class TasksTabFragment extends TabFragment {
 
@@ -35,17 +32,6 @@ public class TasksTabFragment extends TabFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         TaskAdapter taskAdapter = new TaskAdapter();
         recyclerView.setAdapter(taskAdapter);
-
-        SettingsChangeTask task = new SettingsChangeTask();
-        task.setName("Новая задача 1");
-        task.setStartMoment(Calendar.getInstance());
-        taskAdapter.addTask(task);
-
-        SettingsChangeTask task1 = new SettingsChangeTask();
-        task1.setName("Новая задача 2");
-        task1.setStartMoment(Calendar.getInstance());
-        taskAdapter.addTask(task1);
-
 
         return view;
     }
