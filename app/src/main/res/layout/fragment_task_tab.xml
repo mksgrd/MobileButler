@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:paddingTop="5dp"
-              android:paddingBottom="5dp">
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+    <TextView
+            android:text="Запланируйте свою\nпервую задачу,\nнажав на плюс."
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/taskTabTextView"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textAllCaps="false"
+            android:layout_marginTop="100dp"/>
 
-</LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
+</RelativeLayout>
