@@ -1,57 +1,43 @@
 package com.maksg.mobilebutler;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateUtils;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
-import es.dmoral.toasty.Toasty;
 
 public class ScheduleTaskActivity extends AppCompatActivity {
-    private SettingsChangeTask settingsChangeTask;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppDefault);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_task);
 
-        settingsChangeTask = getIntent().getParcelableExtra("Task");
-        settingsChangeTask.setContext(this);
-
-        TextView dateTimeTextView = (TextView) findViewById(R.id.dateTimeTextView);
-        dateTimeTextView.setText(String.format("Выбранное дата и время:\n%s", DateUtils.formatDateTime(this,
-                settingsChangeTask.getStartMoment().getTimeInMillis(),
-                DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_WEEKDAY |
-                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR)));
-
-        String wifiState = settingsChangeTask.isWifiEnabled() ? "Включить" : "Выключить";
-        String bluetoothState = settingsChangeTask.isBluetoothEnabled() ? "Включить" : "Выключить";
-        String text = "Выбранные настройки:\n" +
-                "Громкость предупреждений: " + Integer.toString(settingsChangeTask.getAlarmVolume()) + "\n" +
-                "Громкость музыки: " + Integer.toString(settingsChangeTask.getMusicVolume()) + "\n" +
-                "Громкость оповещений: " + Integer.toString(settingsChangeTask.getNotificationVolume()) + "\n" +
-                "Громкость мелодии звонка: " + Integer.toString(settingsChangeTask.getRingtoneVolume()) + "\n" +
-                "Громкость системных звуков: " + Integer.toString(settingsChangeTask.getSystemVolume()) + "\n" +
-                "Состояние Wi-Fi: " + wifiState + "\n" +
-                "Состояние Bluetooth: " + bluetoothState;
-
-        TextView settingsTextView = (TextView) findViewById(R.id.settingsTextView);
-        settingsTextView.setText(text);
+        initToolBar();
     }
 
-    public void onRecreateTaskButtonClick(View view) {
-        Intent intent = new Intent(this, ChooseActionActivity.class);
-        intent.putExtra("Task", settingsChangeTask);
-        startActivity(intent);
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onPrepareOptionsMenu(menu);
     }
 
-    public void onScheduleTaskButtonClick(View view) {
-        settingsChangeTask.schedule();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        Toasty.success(this, "Задача успешно запланирована", Toast.LENGTH_SHORT, true).show();
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    private void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.scheduleTaskToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Запланировать задачу");
+    }
+
+    public void onFloatingActionButtonClick(View view) {
     }
 }

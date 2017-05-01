@@ -1,10 +1,12 @@
 package com.maksg.mobilebutler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -25,8 +27,15 @@ public class MainActivity extends AppCompatActivity {
         initTabs();
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.app_name);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -34,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        toolbar.inflateMenu(R.menu.menu);
     }
 
     private void initTabs() {
@@ -49,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public void onFloatingActionButtonClick(View view) {
         switch (viewPager.getCurrentItem()) {
             case 0:
-                Toasty.info(this, "Задачи", Toast.LENGTH_SHORT, true).show();
+                startActivity(new Intent(this, ScheduleTaskActivity.class));
                 break;
             case 1:
                 Toasty.info(this, "События", Toast.LENGTH_SHORT, true).show();
