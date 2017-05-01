@@ -39,26 +39,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Укажите имя задачи, измените состояния настроек, которые Вы хотите запланировать и укажите дату и время"
-                        android:layout_marginBottom="12dp"/>
-
-                <EditText
+                <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Введите имя задачи"
+                        android:layout_marginBottom="12dp">
+
+                    <TextView
+                            android:text="Имя задачи:"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="normal|bold"/>
+
+                    <EditText
+                            android:text="Новая задача"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:id="@+id/editText"
+                            android:inputType="text"/>
+                </LinearLayout>
+
+                <TextView
+                        android:text="Измененные ниже настройки будут применены в дату и время, указанные позже:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:maxLines="1"
-                        android:id="@+id/editText"/>
+                        android:textStyle="normal|bold"/>
 
                 <TextView
                         android:text="@string/activity_choose_action_alarm_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/activity_choose_action_alarmTextView"
-                        android:textStyle="normal|bold"/>
+                        />
 
                 <SeekBar
                         android:layout_width="match_parent"
@@ -71,7 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/activity_choose_action_musicTextView"
-                        android:textStyle="normal|bold"/>
+                        />
 
                 <SeekBar
                         android:layout_width="match_parent"
@@ -84,7 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/activity_choose_action_notificationTextView"
-                        android:textStyle="normal|bold"/>
+                        />
 
                 <SeekBar
                         android:layout_width="match_parent"
@@ -97,7 +110,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/activity_choose_action_ringtoneTextView"
-                        android:textStyle="normal|bold"/>
+                        />
 
                 <SeekBar
                         android:layout_width="match_parent"
@@ -110,7 +123,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/activity_choose_action_systemTextView"
-                        android:textStyle="normal|bold"/>
+                        />
 
                 <SeekBar
                         android:layout_width="match_parent"

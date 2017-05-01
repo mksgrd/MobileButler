@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null)
+            return;
         SettingsChangeTask settingsChangeTask = data.getParcelableExtra("Task");
         settingsChangeTask.setContext(this);
         adapter.addTask(settingsChangeTask);

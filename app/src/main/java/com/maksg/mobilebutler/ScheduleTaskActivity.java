@@ -144,9 +144,6 @@ public class ScheduleTaskActivity extends AppCompatActivity {
         };
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, onDateSetListener,
                 dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH));
-
-        /*datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
-        datePickerDialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis()+2600000000L);*/
         datePickerDialog.show();
     }
 

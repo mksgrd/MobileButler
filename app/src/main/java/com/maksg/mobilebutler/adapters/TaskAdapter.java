@@ -54,6 +54,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
     private void removeAt(int position) {
+        tasks.get(position).cancel();
         tasks.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, tasks.size());
