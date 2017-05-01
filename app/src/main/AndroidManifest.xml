@@ -27,10 +27,6 @@
                 android:name=".ScheduleTaskActivity"
                 android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".ChooseActionActivity">
-        </activity>
-        <activity android:name=".ChooseDateTimeActivity">
-        </activity>
     </application>
 
 </manifest>

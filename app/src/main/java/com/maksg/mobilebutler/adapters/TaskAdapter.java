@@ -24,7 +24,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tasks_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tasks_card_item, parent, false);
         return new TaskViewHolder(view);
     }
 
@@ -42,8 +42,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     public void addTask(final SettingsChangeTask settingsChangeTask) {
         tasks.add(settingsChangeTask);
-        settingsChangeTask.schedule();
         notifyDataSetChanged();
+
+        settingsChangeTask.schedule();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

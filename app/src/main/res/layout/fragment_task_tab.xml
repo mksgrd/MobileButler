@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/taskTabTextView"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:textAllCaps="false"
             android:layout_marginTop="100dp"/>
 

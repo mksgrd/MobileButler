@@ -155,7 +155,7 @@
                         android:id="@+id/activity_choose_action_bluetoothSwitch"
                         android:layout_marginBottom="12dp"/>
                 <TextView
-                        android:id="@id/selectedDateTime"
+                        android:id="@+id/selectedDateTime"
                         android:text="Выбранная дата и время:"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
