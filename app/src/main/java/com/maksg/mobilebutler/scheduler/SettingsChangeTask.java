@@ -123,6 +123,8 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
     }
 
     public void setStartMoment(Calendar startMoment) {
+        startMoment.set(Calendar.SECOND, 0);
+        startMoment.set(Calendar.MILLISECOND, 0);
         this.startMoment = startMoment;
     }
 

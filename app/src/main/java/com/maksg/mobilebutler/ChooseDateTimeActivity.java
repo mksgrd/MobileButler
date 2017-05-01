@@ -1,13 +1,11 @@
 package com.maksg.mobilebutler;
 
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
@@ -36,18 +34,7 @@ public class ChooseDateTimeActivity extends AppCompatActivity {
     }
 
     public void onPointDateButtonClick(View view) {
-        DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                dateTime.set(Calendar.YEAR, year);
-                dateTime.set(Calendar.MONTH, month);
-                dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateSelectedDateTimeTextView();
-            }
-        };
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, onDateSetListener,
-                dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
+
     }
 
     public void onPointTimeButtonClick(View view) {
