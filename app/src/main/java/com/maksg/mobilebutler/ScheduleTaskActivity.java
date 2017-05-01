@@ -35,7 +35,7 @@ public class ScheduleTaskActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Запланировать задачу");
+        getSupportActionBar().setTitle("Планирование задачи");
     }
 
     public void onFloatingActionButtonClick(View view) {
