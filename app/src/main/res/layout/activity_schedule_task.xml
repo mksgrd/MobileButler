@@ -42,8 +42,16 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Измените состояния настроек, которые Вы хотите запланировать и укажите дату и время"
+                        android:text="Укажите имя задачи, измените состояния настроек, которые Вы хотите запланировать и укажите дату и время"
                         android:layout_marginBottom="12dp"/>
+
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Введите имя задачи"
+                        android:layout_marginBottom="12dp"
+                        android:maxLines="1"
+                        android:id="@+id/editText"/>
 
                 <TextView
                         android:text="@string/activity_choose_action_alarm_text_view"

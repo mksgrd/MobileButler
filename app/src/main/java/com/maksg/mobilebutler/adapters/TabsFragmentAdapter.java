@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
+import com.maksg.mobilebutler.SettingsChangeTask;
 import com.maksg.mobilebutler.fragments.EventsTabFragment;
 import com.maksg.mobilebutler.fragments.ProfileTabFragment;
 import com.maksg.mobilebutler.fragments.TabFragment;
@@ -13,6 +14,9 @@ import com.maksg.mobilebutler.fragments.TasksTabFragment;
 public class TabsFragmentAdapter extends FragmentPagerAdapter {
 
     private SparseArray<TabFragment> tabs = new SparseArray<>();
+    private TasksTabFragment tasksTabFragment;
+    private EventsTabFragment eventsTabFragment;
+    private ProfileTabFragment profileTabFragment;
 
     public TabsFragmentAdapter(Context context, FragmentManager fm) {
         super(fm);
@@ -34,9 +38,16 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter {
         return tabs.size();
     }
 
+    public void addTask(SettingsChangeTask settingsChangeTask) {
+        tasksTabFragment.addTask(settingsChangeTask);
+    }
+
     private void initTabsMap(Context context) {
-        tabs.put(0, TasksTabFragment.getInstance(context));
-        tabs.put(1, EventsTabFragment.getInstance(context));
-        tabs.put(2, ProfileTabFragment.getInstance(context));
+        tasksTabFragment = TasksTabFragment.getInstance(context);
+        eventsTabFragment = EventsTabFragment.getInstance(context);
+        profileTabFragment = ProfileTabFragment.getInstance(context);
+        tabs.put(0, tasksTabFragment);
+        tabs.put(1, eventsTabFragment);
+        tabs.put(2, profileTabFragment);
     }
 }

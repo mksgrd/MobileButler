@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.maksg.mobilebutler.R;
-import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
+import com.maksg.mobilebutler.SettingsChangeTask;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,7 +43,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void addTask(final SettingsChangeTask settingsChangeTask) {
         tasks.add(settingsChangeTask);
         settingsChangeTask.schedule();
-
+        notifyDataSetChanged();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

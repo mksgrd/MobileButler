@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -13,7 +14,6 @@ import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.*;
-import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
 import es.dmoral.toasty.Toasty;
 
 import java.util.Calendar;
@@ -56,6 +56,7 @@ public class ScheduleTaskActivity extends AppCompatActivity {
     };
     private SeekBar alarmSeekBar, musicSeekBar, notificationSeekBar, ringtoneSeekBar, systemSeekBar;
     private Switch disableAllSoundsSwitch, wifiSwitch, bluetoothSwitch;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class ScheduleTaskActivity extends AppCompatActivity {
         initTextViews();
         initSeekBars();
         initSwitches();
+        initEditText();
 
         updateSelectedDateTimeTextView();
     }
@@ -85,7 +87,7 @@ public class ScheduleTaskActivity extends AppCompatActivity {
 
     public void onScheduleTaskButtonClick(View view) {
         if (Calendar.getInstance().getTimeInMillis() >= dateTime.getTimeInMillis()) {
-            Toasty.error(this, "Невозможно запланировать задачу в указанные дату и время",
+            Toasty.error(this, "Невозможно запланировать задачу на данное время и дату",
                     Toast.LENGTH_LONG, true).show();
             return;
         }
@@ -107,6 +109,13 @@ public class ScheduleTaskActivity extends AppCompatActivity {
         settingsChangeTask.setBluetoothEnabled(bluetoothSwitch.isChecked());
 
         settingsChangeTask.setStartMoment(dateTime);
+
+        settingsChangeTask.setName(editText.getText().toString());
+
+        Intent intent = new Intent();
+        intent.putExtra("Task", settingsChangeTask);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     public void onPointTimeButtonClick(View view) {
@@ -221,5 +230,9 @@ public class ScheduleTaskActivity extends AppCompatActivity {
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothSwitch.setChecked(bluetoothAdapter.isEnabled());
+    }
+
+    private void initEditText() {
+        editText = (EditText) findViewById(R.id.editText);
     }
 }

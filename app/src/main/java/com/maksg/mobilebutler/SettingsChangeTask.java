@@ -1,4 +1,4 @@
-package com.maksg.mobilebutler.scheduler;
+package com.maksg.mobilebutler;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;

@@ -8,7 +8,6 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import com.maksg.mobilebutler.scheduler.SettingsChangeTask;
 
 import java.util.Calendar;
 

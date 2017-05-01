@@ -23,7 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ScheduleTaskActivity">
+        <activity
+                android:name=".ScheduleTaskActivity"
+                android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".ChooseActionActivity">
         </activity>

@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.maksg.mobilebutler.R;
+import com.maksg.mobilebutler.SettingsChangeTask;
 import com.maksg.mobilebutler.adapters.TaskAdapter;
 
 public class TasksTabFragment extends TabFragment {
+    private TaskAdapter taskAdapter = new TaskAdapter();
 
     public static TasksTabFragment getInstance(Context context) {
         Bundle args = new Bundle();
@@ -30,7 +32,7 @@ public class TasksTabFragment extends TabFragment {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        TaskAdapter taskAdapter = new TaskAdapter();
+
         recyclerView.setAdapter(taskAdapter);
 
         return view;
@@ -38,5 +40,9 @@ public class TasksTabFragment extends TabFragment {
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public void addTask(SettingsChangeTask settingsChangeTask) {
+        taskAdapter.addTask(settingsChangeTask);
     }
 }

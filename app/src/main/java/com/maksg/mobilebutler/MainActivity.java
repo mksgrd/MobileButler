@@ -16,6 +16,7 @@ import es.dmoral.toasty.Toasty;
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ViewPager viewPager;
+    private TabsFragmentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,27 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        SettingsChangeTask settingsChangeTask = data.getParcelableExtra("Task");
+        settingsChangeTask.setContext(this);
+        adapter.addTask(settingsChangeTask);
+    }
+
+    public void onFloatingActionButtonClick(View view) {
+        switch (viewPager.getCurrentItem()) {
+            case 0:
+                startActivityForResult(new Intent(this, ScheduleTaskActivity.class), 1);
+                break;
+            case 1:
+                Toasty.info(this, "События", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 2:
+                Toasty.info(this, "Профиль", Toast.LENGTH_SHORT, true).show();
+                break;
+        }
+    }
+
     private void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -47,24 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initTabs() {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-        TabsFragmentAdapter adapter = new TabsFragmentAdapter(this, getSupportFragmentManager());
+        adapter = new TabsFragmentAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    public void onFloatingActionButtonClick(View view) {
-        switch (viewPager.getCurrentItem()) {
-            case 0:
-                startActivity(new Intent(this, ScheduleTaskActivity.class));
-                break;
-            case 1:
-                Toasty.info(this, "События", Toast.LENGTH_SHORT, true).show();
-                break;
-            case 2:
-                Toasty.info(this, "Профиль", Toast.LENGTH_SHORT, true).show();
-                break;
-        }
     }
 }
