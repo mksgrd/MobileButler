@@ -1,4 +1,5 @@
 package com.maksg.mobilebutler.schedulables;
 
-public class SettingsEvent {
+public class SettingsEvent extends SettingsChangeSchedulable {
+
 }
