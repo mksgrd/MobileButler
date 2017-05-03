@@ -19,7 +19,7 @@ import es.dmoral.toasty.Toasty;
 import java.util.Calendar;
 
 public class ScheduleTaskActivity extends AppCompatActivity {
-    private SettingsChangeTask settingsChangeTask = new SettingsChangeTask();
+    private SCTask SCTask = new SCTask();
     private Calendar dateTime = Calendar.getInstance();
 
     private TextView alarmTextView, musicTextView, notificationTextView, ringtoneTextView, systemTextView,
@@ -100,20 +100,20 @@ public class ScheduleTaskActivity extends AppCompatActivity {
             systemSeekBar.setProgress(0);
         }
 
-        settingsChangeTask.setAlarmVolume(alarmSeekBar.getProgress());
-        settingsChangeTask.setMusicVolume(musicSeekBar.getProgress());
-        settingsChangeTask.setNotificationVolume(notificationSeekBar.getProgress());
-        settingsChangeTask.setRingtoneVolume(ringtoneSeekBar.getProgress());
-        settingsChangeTask.setSystemVolume(systemSeekBar.getProgress());
-        settingsChangeTask.setWifiEnabled(wifiSwitch.isChecked());
-        settingsChangeTask.setBluetoothEnabled(bluetoothSwitch.isChecked());
+        SCTask.setAlarmVolume(alarmSeekBar.getProgress());
+        SCTask.setMusicVolume(musicSeekBar.getProgress());
+        SCTask.setNotificationVolume(notificationSeekBar.getProgress());
+        SCTask.setRingtoneVolume(ringtoneSeekBar.getProgress());
+        SCTask.setSystemVolume(systemSeekBar.getProgress());
+        SCTask.setWifiEnabled(wifiSwitch.isChecked());
+        SCTask.setBluetoothEnabled(bluetoothSwitch.isChecked());
 
-        settingsChangeTask.setStartMoment(dateTime);
+        SCTask.setStartMoment(dateTime);
 
-        settingsChangeTask.setName(editText.getText().toString());
+        SCTask.setName(editText.getText().toString());
 
         Intent intent = new Intent();
-        intent.putExtra("Task", settingsChangeTask);
+        intent.putExtra("Task", SCTask);
         setResult(RESULT_OK, intent);
         finish();
     }

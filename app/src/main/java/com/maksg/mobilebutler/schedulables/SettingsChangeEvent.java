@@ -6,16 +6,16 @@ import android.os.Parcel;
 import java.util.Calendar;
 import java.util.TimerTask;
 
-public class SettingsEvent extends SettingsChangeSchedulable {
-    public static final Creator<SettingsEvent> CREATOR = new Creator<SettingsEvent>() {
+public class SettingsChangeEvent extends SettingsChangeTask {
+    public static final Creator<SettingsChangeEvent> CREATOR = new Creator<SettingsChangeEvent>() {
         @Override
-        public SettingsEvent createFromParcel(Parcel in) {
-            return new SettingsEvent(in);
+        public SettingsChangeEvent createFromParcel(Parcel in) {
+            return new SettingsChangeEvent(in);
         }
 
         @Override
-        public SettingsEvent[] newArray(int size) {
-            return new SettingsEvent[size];
+        public SettingsChangeEvent[] newArray(int size) {
+            return new SettingsChangeEvent[size];
         }
     };
     private Calendar restoreDateTime = Calendar.getInstance();
@@ -27,10 +27,10 @@ public class SettingsEvent extends SettingsChangeSchedulable {
         }
     };
 
-    public SettingsEvent() {
+    public SettingsChangeEvent() {
     }
 
-    protected SettingsEvent(Parcel in) {
+    protected SettingsChangeEvent(Parcel in) {
         super(in);
         readCalendarData(restoreDateTime, in);
         restoreSettings = in.createIntArray();

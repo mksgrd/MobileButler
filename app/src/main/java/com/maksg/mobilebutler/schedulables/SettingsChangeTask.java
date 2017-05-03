@@ -12,19 +12,19 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SettingsChangeSchedulable extends TimerTask implements Parcelable {
+public class SettingsChangeTask extends TimerTask implements Parcelable {
     public static final int ALARM_VOLUME = 0, MUSIC_VOLUME = 1, NOTIFICATION_VOLUME = 2, RINGTONE_VOLUME = 3,
             SYSTEM_VOLUME = 4, WIFI_STATE = 5, BLUETOOTH_STATE = 6;
     public static final int SETTINGS_COUNT = 6;
-    public static final Creator<SettingsChangeSchedulable> CREATOR = new Creator<SettingsChangeSchedulable>() {
+    public static final Creator<SettingsChangeTask> CREATOR = new Creator<SettingsChangeTask>() {
         @Override
-        public SettingsChangeSchedulable createFromParcel(Parcel in) {
-            return new SettingsChangeSchedulable(in);
+        public SettingsChangeTask createFromParcel(Parcel in) {
+            return new SettingsChangeTask(in);
         }
 
         @Override
-        public SettingsChangeSchedulable[] newArray(int size) {
-            return new SettingsChangeSchedulable[size];
+        public SettingsChangeTask[] newArray(int size) {
+            return new SettingsChangeTask[size];
         }
     };
     protected Calendar runDateTime = Calendar.getInstance();
@@ -36,10 +36,10 @@ public class SettingsChangeSchedulable extends TimerTask implements Parcelable {
     protected String name;
     protected Context context;
 
-    public SettingsChangeSchedulable() {
+    public SettingsChangeTask() {
     }
 
-    protected SettingsChangeSchedulable(Parcel in) {
+    protected SettingsChangeTask(Parcel in) {
         readCalendarData(runDateTime, in);
         settings = in.createIntArray();
         name = in.readString();

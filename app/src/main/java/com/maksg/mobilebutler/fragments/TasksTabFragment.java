@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.maksg.mobilebutler.R;
-import com.maksg.mobilebutler.SettingsChangeTask;
+import com.maksg.mobilebutler.SCTask;
 import com.maksg.mobilebutler.adapters.TaskAdapter;
 
 public class TasksTabFragment extends TabFragment {
@@ -40,8 +40,8 @@ public class TasksTabFragment extends TabFragment {
         this.context = context;
     }
 
-    public void addTask(SettingsChangeTask settingsChangeTask) {
-        taskAdapter.addTask(settingsChangeTask);
+    public void addTask(SCTask SCTask) {
+        taskAdapter.addTask(SCTask);
     }
 
     private void initTaskTabTextView() {

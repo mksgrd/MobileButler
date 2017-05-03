@@ -12,14 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.maksg.mobilebutler.R;
-import com.maksg.mobilebutler.SettingsChangeTask;
+import com.maksg.mobilebutler.SCTask;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-    private List<SettingsChangeTask> tasks = new ArrayList<>();
+    private List<SCTask> tasks = new ArrayList<>();
     private Handler handler = new Handler();
 
     @Override
@@ -40,18 +40,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         return tasks.size();
     }
 
-    public void addTask(final SettingsChangeTask settingsChangeTask) {
-        tasks.add(settingsChangeTask);
+    public void addTask(final SCTask SCTask) {
+        tasks.add(SCTask);
         notifyDataSetChanged();
 
-        settingsChangeTask.schedule();
+        SCTask.schedule();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (tasks.contains(settingsChangeTask))
-                    removeAt(tasks.indexOf(settingsChangeTask));
+                if (tasks.contains(SCTask))
+                    removeAt(tasks.indexOf(SCTask));
             }
-        }, settingsChangeTask.getStartMoment().getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
+        }, SCTask.getStartMoment().getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
     }
 
     private void removeAt(int position) {

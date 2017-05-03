@@ -12,16 +12,16 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SettingsChangeTask extends TimerTask implements Parcelable {
-    public static final Creator<SettingsChangeTask> CREATOR = new Creator<SettingsChangeTask>() {
+public class SCTask extends TimerTask implements Parcelable {
+    public static final Creator<SCTask> CREATOR = new Creator<SCTask>() {
         @Override
-        public SettingsChangeTask createFromParcel(Parcel in) {
-            return new SettingsChangeTask(in);
+        public SCTask createFromParcel(Parcel in) {
+            return new SCTask(in);
         }
 
         @Override
-        public SettingsChangeTask[] newArray(int size) {
-            return new SettingsChangeTask[size];
+        public SCTask[] newArray(int size) {
+            return new SCTask[size];
         }
     };
     private final Timer timer = new Timer();
@@ -33,10 +33,10 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
     private AudioManager audioManager;
     private WifiManager wifiManager;
 
-    public SettingsChangeTask() {
+    public SCTask() {
     }
 
-    private SettingsChangeTask(Parcel in) {
+    private SCTask(Parcel in) {
         alarmVolume = in.readInt();
         musicVolume = in.readInt();
         notificationVolume = in.readInt();

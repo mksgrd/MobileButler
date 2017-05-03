@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
-import com.maksg.mobilebutler.SettingsChangeTask;
+import com.maksg.mobilebutler.SCTask;
 import com.maksg.mobilebutler.fragments.EventsTabFragment;
 import com.maksg.mobilebutler.fragments.ProfileTabFragment;
 import com.maksg.mobilebutler.fragments.TabFragment;
@@ -38,8 +38,8 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter {
         return tabs.size();
     }
 
-    public void addTask(SettingsChangeTask settingsChangeTask) {
-        tasksTabFragment.addTask(settingsChangeTask);
+    public void addTask(SCTask SCTask) {
+        tasksTabFragment.addTask(SCTask);
     }
 
     private void initTabsMap(Context context) {
