@@ -32,7 +32,7 @@ public class TasksTabFragment extends TabFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_task_tab, container, false);
         initTaskTabTextView();
-        initRecycleView();
+        initRecyclerView();
         return view;
     }
 
@@ -48,7 +48,7 @@ public class TasksTabFragment extends TabFragment {
         textView = (TextView) view.findViewById(R.id.taskTabTextView);
     }
 
-    private void initRecycleView() {
+    private void initRecyclerView() {
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -57,7 +57,7 @@ public class TasksTabFragment extends TabFragment {
         recyclerView.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
             @Override
             public void onChildViewAdded(View parent, View child) {
-                textView.setVisibility(View.GONE);
+                textView.setVisibility(View.INVISIBLE);
             }
 
             @Override
