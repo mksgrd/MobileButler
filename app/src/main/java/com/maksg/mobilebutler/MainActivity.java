@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null)
             return;
-        SettingsChangeTask settingsChangeTask = data.getParcelableExtra("Task");
-        settingsChangeTask.setContext(this);
-        adapter.addTask(settingsChangeTask);
+        SCTask SCTask = data.getParcelableExtra("Task");
+        SCTask.setContext(this);
+        adapter.addTask(SCTask);
     }
 
     public void onFloatingActionButtonClick(View view) {
