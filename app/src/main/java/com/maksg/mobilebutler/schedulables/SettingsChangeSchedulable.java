@@ -40,13 +40,7 @@ public class SettingsChangeSchedulable extends TimerTask implements Parcelable {
     }
 
     protected SettingsChangeSchedulable(Parcel in) {
-        runDateTime.set(Calendar.YEAR, in.readInt());
-        runDateTime.set(Calendar.MONTH, in.readInt());
-        runDateTime.set(Calendar.DAY_OF_MONTH, in.readInt());
-        runDateTime.set(Calendar.HOUR_OF_DAY, in.readInt());
-        runDateTime.set(Calendar.MINUTE, in.readInt());
-        runDateTime.set(Calendar.SECOND, in.readInt());
-        runDateTime.set(Calendar.MILLISECOND, in.readInt());
+        readCalendarData(runDateTime, in);
         settings = in.createIntArray();
         name = in.readString();
     }
@@ -58,31 +52,14 @@ public class SettingsChangeSchedulable extends TimerTask implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(runDateTime.get(Calendar.YEAR));
-        dest.writeInt(runDateTime.get(Calendar.MONTH));
-        dest.writeInt(runDateTime.get(Calendar.DAY_OF_MONTH));
-        dest.writeInt(runDateTime.get(Calendar.HOUR_OF_DAY));
-        dest.writeInt(runDateTime.get(Calendar.MINUTE));
-        dest.writeInt(runDateTime.get(Calendar.SECOND));
-        dest.writeInt(runDateTime.get(Calendar.MILLISECOND));
+        writeCalendarData(runDateTime, dest);
         dest.writeIntArray(settings);
         dest.writeString(name);
     }
 
     @Override
     public void run() {
-        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, settings[ALARM_VOLUME], 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, settings[MUSIC_VOLUME], 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, settings[NOTIFICATION_VOLUME], 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_RING, settings[RINGTONE_VOLUME], 0);
-        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, settings[SYSTEM_VOLUME], 0);
-
-        wifiManager.setWifiEnabled(settings[WIFI_STATE] == 1);
-
-        if (settings[BLUETOOTH_STATE] == 1)
-            bluetoothAdapter.enable();
-        else
-            bluetoothAdapter.disable();
+        applySettings(settings);
     }
 
     public Calendar getRunDateTime() {
@@ -117,14 +94,15 @@ public class SettingsChangeSchedulable extends TimerTask implements Parcelable {
     }
 
     public void schedule() {
+        if (context == null)
+            throw new RuntimeException("Context is not set");
+
         long waitUntilRun = runDateTime.getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
         timer.schedule(this, waitUntilRun);
     }
 
-    public String getFormattedRunDateTime() {
-        return DateUtils.formatDateTime(context,
-                runDateTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_WEEKDAY |
-                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
+    public String getFormattedDateTimeInfo() {
+        return "Запуск: " + formatDateTime(runDateTime);
     }
 
     public String getFormattedSettingsInfo() {
@@ -138,5 +116,46 @@ public class SettingsChangeSchedulable extends TimerTask implements Parcelable {
                 "Громкость системных звуков: " + Integer.toString(settings[SYSTEM_VOLUME]) + "\n" +
                 "Состояние Wi-Fi: " + wifiState + "\n" +
                 "Состояние Bluetooth: " + bluetoothState;
+    }
+
+    protected void applySettings(int[] settingsForApply) {
+        audioManager.setStreamVolume(AudioManager.STREAM_ALARM, settingsForApply[ALARM_VOLUME], 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, settingsForApply[MUSIC_VOLUME], 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, settingsForApply[NOTIFICATION_VOLUME], 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_RING, settingsForApply[RINGTONE_VOLUME], 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, settingsForApply[SYSTEM_VOLUME], 0);
+
+        wifiManager.setWifiEnabled(settingsForApply[WIFI_STATE] == 1);
+
+        if (settingsForApply[BLUETOOTH_STATE] == 1)
+            bluetoothAdapter.enable();
+        else
+            bluetoothAdapter.disable();
+    }
+
+    protected void writeCalendarData(Calendar calendar, Parcel parcel) {
+        parcel.writeInt(calendar.get(Calendar.YEAR));
+        parcel.writeInt(calendar.get(Calendar.MONTH));
+        parcel.writeInt(calendar.get(Calendar.DAY_OF_MONTH));
+        parcel.writeInt(calendar.get(Calendar.HOUR_OF_DAY));
+        parcel.writeInt(calendar.get(Calendar.MINUTE));
+        parcel.writeInt(calendar.get(Calendar.SECOND));
+        parcel.writeInt(calendar.get(Calendar.MILLISECOND));
+    }
+
+    protected void readCalendarData(Calendar calendar, Parcel parcel) {
+        calendar.set(Calendar.YEAR, parcel.readInt());
+        calendar.set(Calendar.MONTH, parcel.readInt());
+        calendar.set(Calendar.DAY_OF_MONTH, parcel.readInt());
+        calendar.set(Calendar.HOUR_OF_DAY, parcel.readInt());
+        calendar.set(Calendar.MINUTE, parcel.readInt());
+        calendar.set(Calendar.SECOND, parcel.readInt());
+        calendar.set(Calendar.MILLISECOND, parcel.readInt());
+    }
+
+    protected String formatDateTime(Calendar calendar) {
+        return DateUtils.formatDateTime(context,
+                calendar.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_WEEKDAY |
+                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
     }
 }
