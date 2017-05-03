@@ -51,6 +51,11 @@ public class SettingsChangeEvent extends SettingsChangeTask {
     }
 
     @Override
+    public boolean cancel() {
+        return super.cancel() && restoreSettingsTask.cancel();
+    }
+
+    @Override
     public String getFormattedDateTimeInfo() {
         return "Начало: " + formatDateTime(runDateTime) + "\n" +
                 "Окончание: " + formatDateTime(restoreDateTime);
