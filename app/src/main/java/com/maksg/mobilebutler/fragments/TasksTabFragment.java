@@ -46,6 +46,7 @@ public class TasksTabFragment extends TabFragment {
 
     private void initTaskTabTextView() {
         textView = (TextView) view.findViewById(R.id.taskTabTextView);
+        textView.setAlpha(0.75F);
     }
 
     private void initRecyclerView() {
