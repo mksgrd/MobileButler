@@ -12,14 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.maksg.mobilebutler.R;
-import com.maksg.mobilebutler.SCTask;
+import com.maksg.mobilebutler.schedulables.SettingsChangeTask;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-    private List<SCTask> tasks = new ArrayList<>();
+    private List<SettingsChangeTask> tasks = new ArrayList<>();
     private Handler handler = new Handler();
 
     @Override
@@ -30,9 +30,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int position) {
-        holder.settings = tasks.get(position).getFormattedSettings();
+        holder.settings = tasks.get(position).getFormattedSettingsInfo();
         holder.toolbar.setTitle(tasks.get(position).getName());
-        holder.selectedTime.setText(tasks.get(position).getFormattedStartMoment(holder.itemView.getContext()));
+        holder.selectedDateTime.setText(tasks.get(position).getFormattedDateTimeInfo());
     }
 
     @Override
@@ -40,18 +40,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         return tasks.size();
     }
 
-    public void addTask(final SCTask SCTask) {
-        tasks.add(SCTask);
+    public void addTask(final SettingsChangeTask settingsChangeTask) {
+        tasks.add(settingsChangeTask);
         notifyDataSetChanged();
-
-        SCTask.schedule();
+        settingsChangeTask.schedule();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (tasks.contains(SCTask))
-                    removeAt(tasks.indexOf(SCTask));
+                if (tasks.contains(settingsChangeTask))
+                    removeAt(tasks.indexOf(settingsChangeTask));
             }
-        }, SCTask.getStartMoment().getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
+        }, settingsChangeTask.getRunDateTime().getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
     }
 
     private void removeAt(int position) {
@@ -62,17 +61,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
-        String settings;
-        Toolbar toolbar;
-        TextView selectedTime;
-        Button showSettings;
+        private String settings;
+        private Toolbar toolbar;
+        private TextView selectedDateTime;
+        private Button showSettings;
         private View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setMessage(settings)
                         .setTitle("Настройки для " + toolbar.getTitle())
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
@@ -84,10 +83,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             }
         };
 
-        TaskViewHolder(final View itemView) {
+        private TaskViewHolder(final View itemView) {
             super(itemView);
 
-            selectedTime = (TextView) itemView.findViewById(R.id.selectedTime);
+            selectedDateTime = (TextView) itemView.findViewById(R.id.selectedTime);
 
             showSettings = (Button) itemView.findViewById(R.id.showSettings);
             showSettings.setOnClickListener(onClickListener);

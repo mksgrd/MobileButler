@@ -14,13 +14,14 @@ import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.*;
+import com.maksg.mobilebutler.schedulables.SettingsChangeTask;
 import es.dmoral.toasty.Toasty;
 
 import java.util.Calendar;
 
 public class ScheduleTaskActivity extends AppCompatActivity {
-    private SCTask SCTask = new SCTask();
-    private Calendar dateTime = Calendar.getInstance();
+    private SettingsChangeTask settingsChangeTask = new SettingsChangeTask();
+    private Calendar runDateTime = Calendar.getInstance();
 
     private TextView alarmTextView, musicTextView, notificationTextView, ringtoneTextView, systemTextView,
             selectedDateTime;
@@ -86,9 +87,9 @@ public class ScheduleTaskActivity extends AppCompatActivity {
     }
 
     public void onScheduleTaskButtonClick(View view) {
-        if (Calendar.getInstance().getTimeInMillis() >= dateTime.getTimeInMillis()) {
-            Toasty.error(this, "Невозможно запланировать задачу на данное время и дату",
-                    Toast.LENGTH_LONG, true).show();
+        if (Calendar.getInstance().getTimeInMillis() >= runDateTime.getTimeInMillis()) {
+            Toasty.error(this, "Дата и(или) время указаны некорректно",
+                    Toast.LENGTH_SHORT, true).show();
             return;
         }
 
@@ -100,21 +101,25 @@ public class ScheduleTaskActivity extends AppCompatActivity {
             systemSeekBar.setProgress(0);
         }
 
-        SCTask.setAlarmVolume(alarmSeekBar.getProgress());
-        SCTask.setMusicVolume(musicSeekBar.getProgress());
-        SCTask.setNotificationVolume(notificationSeekBar.getProgress());
-        SCTask.setRingtoneVolume(ringtoneSeekBar.getProgress());
-        SCTask.setSystemVolume(systemSeekBar.getProgress());
-        SCTask.setWifiEnabled(wifiSwitch.isChecked());
-        SCTask.setBluetoothEnabled(bluetoothSwitch.isChecked());
+        settingsChangeTask.setSettings(SettingsChangeTask.ALARM_VOLUME, alarmSeekBar.getProgress());
+        settingsChangeTask.setSettings(SettingsChangeTask.MUSIC_VOLUME, musicSeekBar.getProgress());
+        settingsChangeTask.setSettings(SettingsChangeTask.NOTIFICATION_VOLUME, notificationSeekBar.getProgress());
+        settingsChangeTask.setSettings(SettingsChangeTask.RINGTONE_VOLUME, ringtoneSeekBar.getProgress());
+        settingsChangeTask.setSettings(SettingsChangeTask.SYSTEM_VOLUME, systemSeekBar.getProgress());
 
-        SCTask.setStartMoment(dateTime);
+        settingsChangeTask.setSettings(SettingsChangeTask.WIFI_STATE, wifiSwitch.isChecked() ? 1 : 0);
+        settingsChangeTask.setSettings(SettingsChangeTask.BLUETOOTH_STATE, bluetoothSwitch.isChecked() ? 1 : 0);
 
-        SCTask.setName(editText.getText().toString());
+        settingsChangeTask.setRunDateTime(runDateTime);
+
+        settingsChangeTask.setName(editText.getText().toString());
 
         Intent intent = new Intent();
-        intent.putExtra("Task", SCTask);
+        intent.putExtra("Task", settingsChangeTask);
         setResult(RESULT_OK, intent);
+
+        Toasty.success(this, "Задача успешно запланирована!", Toast.LENGTH_LONG, true).show();
+
         finish();
     }
 
@@ -122,13 +127,13 @@ public class ScheduleTaskActivity extends AppCompatActivity {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                dateTime.set(Calendar.MINUTE, minute);
+                runDateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                runDateTime.set(Calendar.MINUTE, minute);
                 updateSelectedDateTimeTextView();
             }
         };
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener,
-                dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), true);
+                runDateTime.get(Calendar.HOUR_OF_DAY), runDateTime.get(Calendar.MINUTE), true);
         timePickerDialog.show();
     }
 
@@ -136,27 +141,28 @@ public class ScheduleTaskActivity extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                dateTime.set(Calendar.YEAR, year);
-                dateTime.set(Calendar.MONTH, month);
-                dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                runDateTime.set(Calendar.YEAR, year);
+                runDateTime.set(Calendar.MONTH, month);
+                runDateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateSelectedDateTimeTextView();
             }
         };
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, onDateSetListener,
-                dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH));
+                runDateTime.get(Calendar.YEAR), runDateTime.get(Calendar.MONTH), runDateTime.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
     }
 
     private void updateSelectedDateTimeTextView() {
         selectedDateTime.setText(String.format("Выбранная дата и время:\n%s", DateUtils.formatDateTime(this,
-                dateTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_WEEKDAY |
+                runDateTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_WEEKDAY |
                         DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR)));
     }
 
     private void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.scheduleTaskToolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Планирование задачи");
     }

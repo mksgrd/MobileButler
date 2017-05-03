@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import com.maksg.mobilebutler.adapters.TabsFragmentAdapter;
+import com.maksg.mobilebutler.schedulables.SettingsChangeTask;
 import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null)
             return;
-        SCTask SCTask = data.getParcelableExtra("Task");
-        SCTask.setContext(this);
-        adapter.addTask(SCTask);
+        SettingsChangeTask settingsChangeTask = data.getParcelableExtra("Task");
+        settingsChangeTask.setContext(this);
+        adapter.addTask(settingsChangeTask);
     }
 
     public void onFloatingActionButtonClick(View view) {

@@ -15,7 +15,7 @@ import java.util.TimerTask;
 public class SettingsChangeTask extends TimerTask implements Parcelable {
     public static final int ALARM_VOLUME = 0, MUSIC_VOLUME = 1, NOTIFICATION_VOLUME = 2, RINGTONE_VOLUME = 3,
             SYSTEM_VOLUME = 4, WIFI_STATE = 5, BLUETOOTH_STATE = 6;
-    public static final int SETTINGS_COUNT = 6;
+    public static final int SETTINGS_COUNT = 7;
     public static final Creator<SettingsChangeTask> CREATOR = new Creator<SettingsChangeTask>() {
         @Override
         public SettingsChangeTask createFromParcel(Parcel in) {
@@ -102,7 +102,7 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
     }
 
     public String getFormattedDateTimeInfo() {
-        return "Запуск: " + formatDateTime(runDateTime);
+        return "Запуск запланирован на " + formatDateTime(runDateTime);
     }
 
     public String getFormattedSettingsInfo() {
