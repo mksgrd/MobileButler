@@ -16,7 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,7 +24,11 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ScheduleTaskActivity"
+                android:name=".activities.ScheduleTaskActivity"
+                android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+                android:name=".activities.ScheduleEventActivity"
                 android:windowSoftInputMode="adjustPan">
         </activity>
     </application>

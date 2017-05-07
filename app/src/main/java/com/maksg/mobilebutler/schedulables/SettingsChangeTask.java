@@ -62,6 +62,10 @@ public class SettingsChangeTask extends TimerTask implements Parcelable {
         applySettings(settings);
     }
 
+    public Calendar getStartActionDateTime() {
+        return runDateTime;
+    }
+
     public Calendar getRunDateTime() {
         return runDateTime;
     }

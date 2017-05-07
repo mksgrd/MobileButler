@@ -27,13 +27,26 @@ public class SettingsChangeEvent extends SettingsChangeTask {
         }
     };
 
-    public SettingsChangeEvent() {
+    public SettingsChangeEvent(SettingsChangeTask settingsChangeTask) {
+        runDateTime = settingsChangeTask.runDateTime;
+        settings = settingsChangeTask.settings;
+        timer = settingsChangeTask.timer;
+        audioManager = settingsChangeTask.audioManager;
+        wifiManager = settingsChangeTask.wifiManager;
+        bluetoothAdapter = settingsChangeTask.bluetoothAdapter;
+        name = settingsChangeTask.name;
+        context = settingsChangeTask.context;
     }
 
     protected SettingsChangeEvent(Parcel in) {
         super(in);
         readCalendarData(restoreDateTime, in);
         restoreSettings = in.createIntArray();
+    }
+
+    @Override
+    public Calendar getStartActionDateTime() {
+        return restoreDateTime;
     }
 
     @Override
@@ -59,10 +72,6 @@ public class SettingsChangeEvent extends SettingsChangeTask {
     public String getFormattedDateTimeInfo() {
         return "Начало: " + formatDateTime(runDateTime) + "\n" +
                 "Окончание: " + formatDateTime(restoreDateTime);
-    }
-
-    public Calendar getRestoreDateTime() {
-        return restoreDateTime;
     }
 
     public void setRestoreDateTime(Calendar restoreDateTime) {

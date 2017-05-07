@@ -102,10 +102,7 @@ public class ScheduleTaskFragment extends Fragment implements View.OnClickListen
         updateRunDateTimeTextView();
     }
 
-    public SettingsChangeTask getSettingsChangeTask() throws RuntimeException {
-        if (Calendar.getInstance().getTimeInMillis() >= runDateTime.getTimeInMillis())
-            throw new RuntimeException("Incorrect schedule time");
-
+    public SettingsChangeTask getSettingsChangeTask() {
         if (disableAllSoundsSwitch.isChecked()) {
             alarmSeekBar.setProgress(0);
             musicSeekBar.setProgress(0);
