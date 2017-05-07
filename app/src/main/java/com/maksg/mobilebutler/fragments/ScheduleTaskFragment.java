@@ -86,8 +86,6 @@ public class ScheduleTaskFragment extends Fragment implements View.OnClickListen
         initSwitches();
         initButtons();
 
-        updateRunDateTimeTextView();
-
         return view;
     }
 
@@ -101,6 +99,7 @@ public class ScheduleTaskFragment extends Fragment implements View.OnClickListen
 
     public void setRunDateTimeTextViewText(String text) {
         this.runDateTimeTextViewText = text;
+        updateRunDateTimeTextView();
     }
 
     public SettingsChangeTask getSettingsChangeTask() throws RuntimeException {
