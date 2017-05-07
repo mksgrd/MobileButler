@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         SettingsChangeTask settingsChangeTask = data.getParcelableExtra("Task");
         settingsChangeTask.setContext(this);
-        adapter.addTask(settingsChangeTask);
+        adapter.addTask(settingsChangeTask, viewPager.getCurrentItem());
     }
 
     public void onFloatingActionButtonClick(View view) {
