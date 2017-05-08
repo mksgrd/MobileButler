@@ -86,6 +86,9 @@ public class ScheduleTaskFragment extends Fragment implements View.OnClickListen
         initSwitches();
         initButtons();
 
+        runDateTime.add(Calendar.MINUTE, 1);
+        updateRunDateTimeTextView();
+
         return view;
     }
 

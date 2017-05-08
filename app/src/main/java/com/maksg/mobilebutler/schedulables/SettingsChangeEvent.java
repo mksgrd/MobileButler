@@ -75,6 +75,8 @@ public class SettingsChangeEvent extends SettingsChangeTask {
     }
 
     public void setRestoreDateTime(Calendar restoreDateTime) {
+        restoreDateTime.set(Calendar.MILLISECOND, 0);
+        restoreDateTime.set(Calendar.SECOND, 0);
         this.restoreDateTime = restoreDateTime;
     }
 

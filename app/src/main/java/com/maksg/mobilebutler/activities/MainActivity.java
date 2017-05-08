@@ -16,7 +16,6 @@ import com.maksg.mobilebutler.schedulables.SettingsChangeTask;
 import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
-    private Toolbar toolbar;
     private ViewPager viewPager;
     private TabsFragmentAdapter adapter;
 
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.app_name);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {

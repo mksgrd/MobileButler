@@ -37,7 +37,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
         initTextView();
         initScheduleTaskFragment();
 
-        endDateTime.add(Calendar.MINUTE, 1);
+        endDateTime.add(Calendar.MINUTE, 2);
 
         updateEndDateTimeTextView();
     }
@@ -86,9 +86,6 @@ public class ScheduleEventActivity extends AppCompatActivity {
 
     public void onScheduleEventButtonClick(View view) {
         SettingsChangeEvent settingsChangeEvent = new SettingsChangeEvent(scheduleTaskFragment.getSettingsChangeTask());
-
-        endDateTime.set(Calendar.SECOND, 0);
-        endDateTime.set(Calendar.MILLISECOND, 0);
         settingsChangeEvent.setRestoreDateTime(endDateTime);
 
         if (settingsChangeEvent.getRunDateTime().getTimeInMillis() <= Calendar.getInstance().getTimeInMillis() ||
@@ -105,7 +102,7 @@ public class ScheduleEventActivity extends AppCompatActivity {
         intent.putExtra("Task", settingsChangeEvent);
         setResult(RESULT_OK, intent);
 
-        Toasty.success(this, "Задача успешно запланирована!", Toast.LENGTH_LONG, true).show();
+        Toasty.success(this, "Событие успешно запланировано!", Toast.LENGTH_LONG, true).show();
 
         finish();
     }
