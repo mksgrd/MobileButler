@@ -48,8 +48,8 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter {
     }
 
     private void initTabsMap(Context context) {
-        tasksTabFragment = TasksTabFragment.getInstance(context, "Запланируйте свою\nпервую задачу,\nнажав на плюс.", "Задачи");
-        eventsTabFragment = TasksTabFragment.getInstance(context, "Запланируйте свое\nпервое событие,\nнажав на плюс.", "События");
+        tasksTabFragment = TasksTabFragment.getInstance(context, "Запланируйте\nновую задачу,\nнажав на плюс.", "Задачи");
+        eventsTabFragment = TasksTabFragment.getInstance(context, "Запланируйте\nновое событие,\nнажав на плюс.", "События");
         profileTabFragment = ProfileTabFragment.getInstance(context);
         tabs.put(0, tasksTabFragment);
         tabs.put(1, eventsTabFragment);

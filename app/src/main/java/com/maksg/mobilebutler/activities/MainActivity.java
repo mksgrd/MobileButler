@@ -59,13 +59,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.app_name);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                return false;
+                Toasty.info(getApplicationContext(), "HELP", Toast.LENGTH_SHORT, true).show();
+                return true;
             }
         });
     }
