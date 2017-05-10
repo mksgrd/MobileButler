@@ -50,7 +50,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 if (tasks.contains(settingsChangeTask))
                     removeAt(tasks.indexOf(settingsChangeTask));
             }
-        }, settingsChangeTask.getRunDateTime().getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
+        }, settingsChangeTask.getStartActionDateTime().getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
     }
 
     private void removeAt(int position) {

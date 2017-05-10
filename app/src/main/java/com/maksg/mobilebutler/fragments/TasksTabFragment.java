@@ -16,14 +16,15 @@ import com.maksg.mobilebutler.schedulables.SettingsChangeTask;
 public class TasksTabFragment extends TabFragment {
     private TaskAdapter taskAdapter = new TaskAdapter();
     private TextView textView;
+    private String emptyMes;
 
-    public static TasksTabFragment getInstance(Context context) {
+    public static TasksTabFragment getInstance(Context context, String emptyMes, String title) {
         Bundle args = new Bundle();
         TasksTabFragment fragment = new TasksTabFragment();
         fragment.setArguments(args);
         fragment.setContext(context);
-        fragment.setTitle(context.getString(R.string.tab_item_tasks));
-
+        fragment.setTitle(title);
+        fragment.emptyMes = emptyMes;
         return fragment;
     }
 
@@ -46,6 +47,7 @@ public class TasksTabFragment extends TabFragment {
 
     private void initTaskTabTextView() {
         textView = (TextView) view.findViewById(R.id.taskTabTextView);
+        textView.setText(emptyMes);
         textView.setAlpha(0.75F);
     }
 

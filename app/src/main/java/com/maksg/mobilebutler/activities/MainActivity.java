@@ -1,4 +1,4 @@
-package com.maksg.mobilebutler;
+package com.maksg.mobilebutler.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import com.maksg.mobilebutler.R;
 import com.maksg.mobilebutler.adapters.TabsFragmentAdapter;
 import com.maksg.mobilebutler.schedulables.SettingsChangeTask;
 import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
-    private Toolbar toolbar;
     private ViewPager viewPager;
     private TabsFragmentAdapter adapter;
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         SettingsChangeTask settingsChangeTask = data.getParcelableExtra("Task");
         settingsChangeTask.setContext(this);
-        adapter.addTask(settingsChangeTask);
+        adapter.addTask(settingsChangeTask, viewPager.getCurrentItem());
     }
 
     public void onFloatingActionButtonClick(View view) {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(new Intent(this, ScheduleTaskActivity.class), 1);
                 break;
             case 1:
-                Toasty.info(this, "События", Toast.LENGTH_SHORT, true).show();
+                startActivityForResult(new Intent(this, ScheduleEventActivity.class), 1);
                 break;
             case 2:
                 Toasty.info(this, "Профиль", Toast.LENGTH_SHORT, true).show();
@@ -59,13 +59,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(R.string.app_name);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                return false;
+                startActivity(new Intent(getBaseContext(), HelpActivity.class));
+                return true;
             }
         });
     }

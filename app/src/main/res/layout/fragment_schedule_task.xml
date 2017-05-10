@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+        <TextView
+                android:id="@+id/editTextView"
+                android:text="Имя задачи:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="normal|bold"/>
+
+        <EditText
+                android:text="Новая задача"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:id="@+id/editText"
+                android:inputType="text"/>
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/infoTextView"
+            android:text="Измененные ниже настройки будут применены в дату и время, указанные позже:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:textStyle="normal|bold"/>
+
+    <TextView
+            android:text="@string/activity_choose_action_alarm_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/alarmTextView"
+            />
+
+    <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/alarmSeekBar"
+            android:layout_marginBottom="12dp"/>
+
+    <TextView
+            android:text="@string/activity_choose_action_music_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/musicTextView"
+            />
+
+    <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/musicSeekBar"
+            android:layout_marginBottom="12dp"/>
+
+    <TextView
+            android:text="@string/activity_choose_action_notification_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notificationTextView"
+            />
+
+    <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notificationSeekBar"
+            android:layout_marginBottom="12dp"/>
+
+    <TextView
+            android:text="@string/activity_choose_action_ringtone_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ringtoneTextView"
+            />
+
+    <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ringtoneSeekBar"
+            android:layout_marginBottom="12dp"/>
+
+    <TextView
+            android:text="@string/activity_choose_action_system_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/systemTextView"
+            />
+
+    <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/systemSeekBar"
+            android:layout_marginBottom="12dp"/>
+
+    <Switch
+            android:text="@string/activity_choose_action_disable_all_sounds_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/disableAllSoundsSwitch"
+            android:layout_marginBottom="12dp"
+            android:checked="false"
+            android:textOn="@string/activity_choose_action_disable_all_sounds_switch_yes"
+            android:textOff="@string/activity_choose_action_disable_all_sounds_switch_no"/>
+
+    <Switch
+            android:text="@string/activity_choose_action_wifi_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/wifiSwitch"
+            android:layout_marginBottom="12dp"/>
+
+    <Switch
+            android:text="@string/activity_choose_action_bluetooth_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bluetoothSwitch"
+            android:layout_marginBottom="12dp"/>
+
+    <TextView
+            android:id="@+id/selectedDateTime"
+            android:text="Выбранная дата и время:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+        <Button
+                android:id="@+id/pointDateButton"
+                android:text="Указать дату"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+
+        <Button
+                android:id="@+id/pointTimeButton"
+                android:text="Указать время"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+    </LinearLayout>
+
+</LinearLayout>

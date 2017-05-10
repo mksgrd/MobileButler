@@ -1,47 +1,52 @@
-package com.maksg.mobilebutler;
+package com.maksg.mobilebutler.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
+import com.maksg.mobilebutler.R;
 import com.maksg.mobilebutler.schedulables.SettingsChangeTask;
-import es.dmoral.toasty.Toasty;
 
 import java.util.Calendar;
 
-public class ScheduleTaskActivity extends AppCompatActivity {
-    private SettingsChangeTask settingsChangeTask = new SettingsChangeTask();
+public class ScheduleTaskFragment extends Fragment implements View.OnClickListener {
+    private SettingsChangeTask settingsChangeTask;
+    private View view;
     private Calendar runDateTime = Calendar.getInstance();
-
-    private TextView alarmTextView, musicTextView, notificationTextView, ringtoneTextView, systemTextView,
-            selectedDateTime;
-    private final SeekBar.OnSeekBarChangeListener onSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+    private TextView editTextView, settingsInfoTextView, alarmTextView, musicTextView, notificationTextView,
+            ringtoneTextView, systemTextView, selectedDateTime;
+    private EditText editText;
+    private SeekBar alarmSeekBar, musicSeekBar, notificationSeekBar, ringtoneSeekBar, systemSeekBar;
+    private Switch disableAllSoundsSwitch, wifiSwitch, bluetoothSwitch;
+    private Button pointDateButton, pointTimeButton;
+    private String runDateTimeTextViewText;
+    private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             switch (seekBar.getId()) {
-                case R.id.activity_choose_action_alarmSeekBar:
+                case R.id.alarmSeekBar:
                     alarmTextView.setText(String.format("Громкость предупреждений: %s", Integer.toString(progress)));
                     break;
-                case R.id.activity_choose_action_musicSeekBar:
+                case R.id.musicSeekBar:
                     musicTextView.setText(String.format("Громкость музыки: %s", Integer.toString(progress)));
                     break;
-                case R.id.activity_choose_action_notificationSeekBar:
+                case R.id.notificationSeekBar:
                     notificationTextView.setText(String.format("Громкость оповещений: %s", Integer.toString(progress)));
                     break;
-                case R.id.activity_choose_action_ringtoneSeekBar:
+                case R.id.ringtoneSeekBar:
                     ringtoneTextView.setText(String.format("Громкость мелодии звонка: %s", Integer.toString(progress)));
                     break;
-                case R.id.activity_choose_action_systemSeekBar:
+                case R.id.systemSeekBar:
                     systemTextView.setText(String.format("Громкость системных звуков: %s", Integer.toString(progress)));
                     break;
             }
@@ -49,50 +54,58 @@ public class ScheduleTaskActivity extends AppCompatActivity {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
+
         }
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
+
         }
     };
-    private SeekBar alarmSeekBar, musicSeekBar, notificationSeekBar, ringtoneSeekBar, systemSeekBar;
-    private Switch disableAllSoundsSwitch, wifiSwitch, bluetoothSwitch;
-    private EditText editText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppDefault);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule_task);
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.pointDateButton:
+                showDatePickerDialog();
+                break;
+            case R.id.pointTimeButton:
+                showTimePickerDialog();
+                break;
+        }
+    }
 
-        initToolBar();
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_schedule_task, container, false);
+
         initTextViews();
+        initEditText();
         initSeekBars();
         initSwitches();
-        initEditText();
+        initButtons();
 
-        updateSelectedDateTimeTextView();
+        runDateTime.add(Calendar.MINUTE, 1);
+        updateRunDateTimeTextView();
+
+        return view;
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onPrepareOptionsMenu(menu);
+    public void setEditTextViewText(String text) {
+        editTextView.setText(text);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    public void setEditTextText(String text) {
+        editText.setText(text);
     }
 
-    public void onScheduleTaskButtonClick(View view) {
-        if (Calendar.getInstance().getTimeInMillis() >= runDateTime.getTimeInMillis()) {
-            Toasty.error(this, "Дата и(или) время указаны некорректно",
-                    Toast.LENGTH_SHORT, true).show();
-            return;
-        }
+    public void setRunDateTimeTextViewText(String text) {
+        this.runDateTimeTextViewText = text;
+        updateRunDateTimeTextView();
+    }
 
+    public SettingsChangeTask getSettingsChangeTask() {
         if (disableAllSoundsSwitch.isChecked()) {
             alarmSeekBar.setProgress(0);
             musicSeekBar.setProgress(0);
@@ -114,79 +127,75 @@ public class ScheduleTaskActivity extends AppCompatActivity {
 
         settingsChangeTask.setName(editText.getText().toString());
 
-        Intent intent = new Intent();
-        intent.putExtra("Task", settingsChangeTask);
-        setResult(RESULT_OK, intent);
-
-        Toasty.success(this, "Задача успешно запланирована!", Toast.LENGTH_LONG, true).show();
-
-        finish();
+        return settingsChangeTask;
     }
 
-    public void onPointTimeButtonClick(View view) {
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                runDateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                runDateTime.set(Calendar.MINUTE, minute);
-                updateSelectedDateTimeTextView();
-            }
-        };
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener,
-                runDateTime.get(Calendar.HOUR_OF_DAY), runDateTime.get(Calendar.MINUTE), true);
-        timePickerDialog.show();
+    public void setSettingsChangeTask(SettingsChangeTask settingsChangeTask) {
+        this.settingsChangeTask = settingsChangeTask;
     }
 
-    public void onPointDateButtonClick(View view) {
+    public void showDatePickerDialog() {
         DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 runDateTime.set(Calendar.YEAR, year);
                 runDateTime.set(Calendar.MONTH, month);
                 runDateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateSelectedDateTimeTextView();
+                updateRunDateTimeTextView();
             }
         };
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, onDateSetListener,
-                runDateTime.get(Calendar.YEAR), runDateTime.get(Calendar.MONTH), runDateTime.get(Calendar.DAY_OF_MONTH));
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), onDateSetListener,
+                runDateTime.get(Calendar.YEAR), runDateTime.get(Calendar.MONTH),
+                runDateTime.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
     }
 
-    private void updateSelectedDateTimeTextView() {
-        selectedDateTime.setText(String.format("Выбранная дата и время:\n%s", DateUtils.formatDateTime(this,
+    public void showTimePickerDialog() {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                runDateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                runDateTime.set(Calendar.MINUTE, minute);
+                updateRunDateTimeTextView();
+            }
+        };
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), onTimeSetListener,
+                runDateTime.get(Calendar.HOUR_OF_DAY), runDateTime.get(Calendar.MINUTE), true);
+        timePickerDialog.show();
+    }
+
+    public void updateRunDateTimeTextView() {
+        selectedDateTime.setText(String.format(runDateTimeTextViewText + "\n%s", DateUtils.formatDateTime(getContext(),
                 runDateTime.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_WEEKDAY |
                         DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR)));
     }
 
-    private void initToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.scheduleTaskToolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Планирование задачи");
+    private void initTextViews() {
+        editTextView = (TextView) view.findViewById(R.id.editTextView);
+        settingsInfoTextView = (TextView) view.findViewById(R.id.infoTextView);
+        alarmTextView = (TextView) view.findViewById(R.id.alarmTextView);
+        musicTextView = (TextView) view.findViewById(R.id.musicTextView);
+        notificationTextView = (TextView) view.findViewById(R.id.notificationTextView);
+        ringtoneTextView = (TextView) view.findViewById(R.id.ringtoneTextView);
+        systemTextView = (TextView) view.findViewById(R.id.systemTextView);
+        selectedDateTime = (TextView) view.findViewById(R.id.selectedDateTime);
     }
 
-    private void initTextViews() {
-        alarmTextView = (TextView) findViewById(R.id.activity_choose_action_alarmTextView);
-        musicTextView = (TextView) findViewById(R.id.activity_choose_action_musicTextView);
-        notificationTextView = (TextView) findViewById(R.id.activity_choose_action_notificationTextView);
-        ringtoneTextView = (TextView) findViewById(R.id.activity_choose_action_ringtoneTextView);
-        systemTextView = (TextView) findViewById(R.id.activity_choose_action_systemTextView);
-        selectedDateTime = (TextView) findViewById(R.id.selectedDateTime);
+    private void initEditText() {
+        editText = (EditText) view.findViewById(R.id.editText);
     }
 
     private void initSeekBars() {
-        alarmSeekBar = (SeekBar) findViewById(R.id.activity_choose_action_alarmSeekBar);
-        musicSeekBar = (SeekBar) findViewById(R.id.activity_choose_action_musicSeekBar);
-        notificationSeekBar = (SeekBar) findViewById(R.id.activity_choose_action_notificationSeekBar);
-        ringtoneSeekBar = (SeekBar) findViewById(R.id.activity_choose_action_ringtoneSeekBar);
-        systemSeekBar = (SeekBar) findViewById(R.id.activity_choose_action_systemSeekBar);
+        alarmSeekBar = (SeekBar) view.findViewById(R.id.alarmSeekBar);
+        musicSeekBar = (SeekBar) view.findViewById(R.id.musicSeekBar);
+        notificationSeekBar = (SeekBar) view.findViewById(R.id.notificationSeekBar);
+        ringtoneSeekBar = (SeekBar) view.findViewById(R.id.ringtoneSeekBar);
+        systemSeekBar = (SeekBar) view.findViewById(R.id.systemSeekBar);
         setUpSeekBars();
     }
 
     private void setUpSeekBars() {
-        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
 
         alarmSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
         alarmSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_ALARM));
@@ -210,9 +219,9 @@ public class ScheduleTaskActivity extends AppCompatActivity {
     }
 
     private void initSwitches() {
-        disableAllSoundsSwitch = (Switch) findViewById(R.id.activity_choose_action_disableAllSoundsSwitch);
-        wifiSwitch = (Switch) findViewById(R.id.activity_choose_action_wifiSwitch);
-        bluetoothSwitch = (Switch) findViewById(R.id.activity_choose_action_bluetoothSwitch);
+        disableAllSoundsSwitch = (Switch) view.findViewById(R.id.disableAllSoundsSwitch);
+        wifiSwitch = (Switch) view.findViewById(R.id.wifiSwitch);
+        bluetoothSwitch = (Switch) view.findViewById(R.id.bluetoothSwitch);
         setUpSwitches();
     }
 
@@ -228,14 +237,18 @@ public class ScheduleTaskActivity extends AppCompatActivity {
             }
         });
 
-        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         wifiSwitch.setChecked(wifiManager.isWifiEnabled());
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothSwitch.setChecked(bluetoothAdapter.isEnabled());
     }
 
-    private void initEditText() {
-        editText = (EditText) findViewById(R.id.editText);
+    private void initButtons() {
+        pointDateButton = (Button) view.findViewById(R.id.pointDateButton);
+        pointDateButton.setOnClickListener(this);
+
+        pointTimeButton = (Button) view.findViewById(R.id.pointTimeButton);
+        pointTimeButton.setOnClickListener(this);
     }
 }

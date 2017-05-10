@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
-import com.maksg.mobilebutler.fragments.EventsTabFragment;
 import com.maksg.mobilebutler.fragments.ProfileTabFragment;
 import com.maksg.mobilebutler.fragments.TabFragment;
 import com.maksg.mobilebutler.fragments.TasksTabFragment;
@@ -14,8 +13,7 @@ import com.maksg.mobilebutler.schedulables.SettingsChangeTask;
 public class TabsFragmentAdapter extends FragmentPagerAdapter {
 
     private SparseArray<TabFragment> tabs = new SparseArray<>();
-    private TasksTabFragment tasksTabFragment;
-    private EventsTabFragment eventsTabFragment;
+    private TasksTabFragment tasksTabFragment, eventsTabFragment;
     private ProfileTabFragment profileTabFragment;
 
     public TabsFragmentAdapter(Context context, FragmentManager fm) {
@@ -38,13 +36,20 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter {
         return tabs.size();
     }
 
-    public void addTask(SettingsChangeTask settingsChangeTask) {
-        tasksTabFragment.addTask(settingsChangeTask);
+    public void addTask(SettingsChangeTask settingsChangeTask, int id) {
+        switch (id) {
+            case 0:
+                tasksTabFragment.addTask(settingsChangeTask);
+                break;
+            case 1:
+                eventsTabFragment.addTask(settingsChangeTask);
+                break;
+        }
     }
 
     private void initTabsMap(Context context) {
-        tasksTabFragment = TasksTabFragment.getInstance(context);
-        eventsTabFragment = EventsTabFragment.getInstance(context);
+        tasksTabFragment = TasksTabFragment.getInstance(context, "Запланируйте\nновую задачу,\nнажав на плюс.", "Задачи");
+        eventsTabFragment = TasksTabFragment.getInstance(context, "Запланируйте\nновое событие,\nнажав на плюс.", "События");
         profileTabFragment = ProfileTabFragment.getInstance(context);
         tabs.put(0, tasksTabFragment);
         tabs.put(1, eventsTabFragment);
