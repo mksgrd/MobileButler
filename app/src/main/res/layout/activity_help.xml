@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:fitsSystemWindows="true">
+
+    <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                    android:id="@+id/helpToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:titleTextColor="@android:color/white"/>
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:padding="@dimen/activity_horizontal_margin">
+
+            <TextView
+                    android:text="Добро пожаловать в приложение MobileButler.\n\nОно предназначено для планирования задач и событий, связанных с изменением настроек звука, Wi-Fi и Bluetooth.\n\nЗадача представлет собой набор настроек, которые будут применены в указанный срок.\n\nСобытие же состоит из 2 задач: первая активирует необходимые Вам настройки, а вторая их отменяет.\n\nДля Вашего события или задачи можно выбрать любое время запуска с точностью до минут.\n\nЭто все, что необходимо знать для полноценного использования данного приложения."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="normal|bold"/>
+        </ScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</android.support.v4.widget.DrawerLayout>

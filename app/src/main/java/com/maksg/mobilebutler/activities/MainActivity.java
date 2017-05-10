@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Toasty.info(getApplicationContext(), "HELP", Toast.LENGTH_SHORT, true).show();
+                startActivity(new Intent(getBaseContext(), HelpActivity.class));
                 return true;
             }
         });
