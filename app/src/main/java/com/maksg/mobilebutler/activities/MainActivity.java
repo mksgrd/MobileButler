@@ -18,6 +18,7 @@ import es.dmoral.toasty.Toasty;
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabsFragmentAdapter adapter;
+    private boolean onPrepareOptionsMenuInvoked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
+        if (!onPrepareOptionsMenuInvoked) {
+            onPrepareOptionsMenuInvoked = true;
+            getMenuInflater().inflate(R.menu.menu, menu);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

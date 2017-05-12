@@ -17,6 +17,7 @@ import java.util.Calendar;
 
 public class ScheduleTaskActivity extends AppCompatActivity {
     private ScheduleTaskFragment scheduleTaskFragment;
+    private boolean onPrepareOptionsMenuInvoked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +31,13 @@ public class ScheduleTaskActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        if (!onPrepareOptionsMenuInvoked) {
+            onPrepareOptionsMenuInvoked = true;
+            getMenuInflater().inflate(R.menu.menu, menu);
+        }
         return super.onPrepareOptionsMenu(menu);
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
