@@ -9,11 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import com.maksg.mobilebutler.R;
 import com.maksg.mobilebutler.adapters.TabsFragmentAdapter;
 import com.maksg.mobilebutler.schedulables.SettingsChangeTask;
-import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
@@ -55,9 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 1:
                 startActivityForResult(new Intent(this, ScheduleEventActivity.class), 1);
-                break;
-            case 2:
-                Toasty.info(this, "Профиль", Toast.LENGTH_SHORT, true).show();
                 break;
         }
     }
